@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stanely Kimani Macharia — Senior Full-Stack Engineer</title>
+<meta name="description" content="Senior Full-Stack Engineer & ICT Systems Administrator based in Nairobi, Kenya. Laravel, Flutter, PostgreSQL, DigitalOcean."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+
+/* ══════════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:        #0a192f;
+  --bg2:       #112240;
+  --bg3:       #1d3557;
+  --accent:    #64ffda;
+  --accent2:   #57cbff;
+  --text:      #ccd6f6;
+  --text-muted:#8892b0;
+  --white:     #e6f1ff;
+  --font:      'Inter', sans-serif;
+  --mono:      'Fira Code', monospace;
+  --max:       1100px;
+  --radius:    8px;
+  --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════════════════════ */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 9999;
+  transform-origin: left;
+  animation: progress-grow linear;
+  animation-timeline: scroll(root);
+}
+@keyframes progress-grow { to { transform: scaleX(1); } }
+
+/* ══════════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  padding: 0 48px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,25,47,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(100,255,218,0.08);
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+  counter-increment: nav-item;
+}
+
+.nav-links a::before {
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-cta {
+  padding: 10px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--accent) !important;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.nav-cta:hover {
+  background: rgba(100,255,218,0.08);
+}
+
+/* ══════════════════════════════════════════════
+   SIDEBAR SOCIALS (fixed left)
+══════════════════════════════════════════════ */
+.sidebar-left {
+  position: fixed;
+  left: 32px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 100;
+}
+.sidebar-left::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 80px;
+  background: var(--text-muted);
+  margin-top: 8px;
+}
+
+.sidebar-left a {
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+}
+.sidebar-left a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+.sidebar-left svg { width: 20px; height: 20px; }
+
+.sidebar-right {
+  position: fixed;
+  right: 32px;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
+}
+.sidebar-right::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 80px;
+  background: var(--text-muted);
+  margin-top: 8px;
+}
+.sidebar-right a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  letter-spacing: 2px;
+  transition: var(--transition);
+}
+.sidebar-right a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* ══════════════════════════════════════════════
+   MAIN CONTENT WRAPPER
+══════════════════════════════════════════════ */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION HEADINGS
+══════════════════════════════════════════════ */
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+  white-space: nowrap;
+}
+.section-heading .num {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--accent);
+}
+.section-heading h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--bg3);
+}
+
+/* ══════════════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 70px;
+}
+
+.hero-greeting {
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.hero-name {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.hero-role {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--text-muted);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 28px;
+}
+
+.hero-desc {
+  max-width: 560px;
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.hero-desc strong {
+  color: var(--accent);
+}
+
+.hero-metrics {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+}
+.metric-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.metric-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 16px 32px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: rgba(100,255,218,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
+}
+
+.btn-secondary {
+  padding: 16px 32px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  transition: var(--transition);
+}
+.btn-secondary:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
+}
+
+/* ══════════════════════════════════════════════
+   ABOUT SECTION
+══════════════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.about-text p strong {
+  color: var(--accent);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.skill-item::before {
+  content: '▹';
+  color: var(--accent);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.about-card {
+  background: var(--bg2);
+  border: 1px solid rgba(100,255,218,0.1);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.about-card h3 {
+  font-size: 13px;
+  font-family: var(--mono);
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.stat-value {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════
+   EXPERIENCE SECTION
+══════════════════════════════════════════════ */
+.experience-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+}
+
+.exp-tabs {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--bg3);
+}
+
+.exp-tab {
+  padding: 14px 20px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  margin-left: -2px;
+  transition: var(--transition);
+  background: none;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  text-align: left;
+  white-space: nowrap;
+}
+.exp-tab:hover {
+  color: var(--accent);
+  background: rgba(100,255,218,0.05);
+}
+.exp-tab.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: rgba(100,255,218,0.05);
+}
+
+.exp-panel {
+  display: none;
+  padding: 0 32px;
+  animation: fadeIn 0.3s ease;
+}
+.exp-panel.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+.exp-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.exp-title span {
+  color: var(--accent);
+}
+.exp-meta {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.exp-bullets li {
+  display: flex;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.exp-bullets li::before {
+  content: '▹';
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.exp-bullets strong {
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════════════
+   FEATURED PROJECTS
+══════════════════════════════════════════════ */
+.featured-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.feat-project {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: center;
+  position: relative;
+}
+
+.feat-project.reverse {
+  direction: rtl;
+}
+.feat-project.reverse > * {
+  direction: ltr;
+}
+
+.feat-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.feat-visual-inner {
+  background: var(--bg2);
+  border: 1px solid rgba(100,255,218,0.12);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.feat-visual-inner:hover {
+  border-color: rgba(100,255,218,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.feat-visual-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(100,255,218,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.arch-diagram {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  white-space: pre;
+}
+.arch-diagram .accent { color: var(--accent); }
+.arch-diagram .blue { color: var(--accent2); }
+.arch-diagram .white { color: var(--white); }
+
+.feat-content {
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.feat-overline {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.feat-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.feat-desc {
+  background: var(--bg2);
+  border: 1px solid rgba(100,255,218,0.08);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.feat-result {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.result-pill {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 6px 12px;
+  background: rgba(100,255,218,0.08);
+  border: 1px solid rgba(100,255,218,0.2);
+  border-radius: 20px;
+  color: var(--accent);
+}
+
+.feat-tech {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.tech-tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.feat-links {
+  display: flex;
+  gap: 16px;
+}
+.feat-links a {
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.feat-links a:hover { color: var(--accent); }
+.feat-links svg { width: 18px; height: 18px; }
+
+/* ══════════════════════════════════════════════
+   OTHER PROJECTS GRID
+══════════════════════════════════════════════ */
+.other-projects-heading {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 80px 0 40px;
+}
+.other-projects-heading span { color: var(--accent); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid rgba(100,255,218,0.08);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.proj-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition);
+}
+.proj-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(100,255,218,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.proj-card:hover::before { transform: scaleX(1); }
+
+.proj-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.proj-icon {
+  color: var(--accent);
+}
+.proj-icon svg { width: 36px; height: 36px; }
+.proj-links a {
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.proj-links a:hover { color: var(--accent); }
+.proj-links svg { width: 18px; height: 18px; }
+
+.proj-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.proj-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+.proj-tech {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.proj-tech span {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════════
+   CONTACT SECTION
+══════════════════════════════════════════════ */
+#contact {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 0 120px;
+}
+
+.contact-overline {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.contact-heading {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+.contact-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+.contact-email {
+  display: inline-block;
+  padding: 18px 40px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 15px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: var(--transition);
+  margin-bottom: 48px;
+}
+.contact-email:hover {
+  background: rgba(100,255,218,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+.contact-links a {
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  transition: var(--transition);
+  letter-spacing: 1px;
+}
+.contact-links a:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 1080px) {
+  main { padding: 0 64px; }
+  .sidebar-left, .sidebar-right { display: none; }
+}
+
+@media (max-width: 768px) {
+  main { padding: 0 24px; }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .experience-layout { grid-template-columns: 1fr; }
+  .exp-tabs { flex-direction: row; overflow-x: auto; border-left: none; border-bottom: 2px solid var(--bg3); margin-bottom: 32px; }
+  .exp-tab { border-left: none; border-bottom: 2px solid transparent; margin-left: 0; margin-bottom: -2px; }
+  .exp-tab.active { border-bottom-color: var(--accent); }
+  .exp-panel { padding: 0; }
+
+  .feat-project, .feat-project.reverse { grid-template-columns: 1fr; direction: ltr; }
+  .feat-visual { display: none; }
+  .feat-content { padding: 0; }
+
+  .projects-grid { grid-template-columns: 1fr; }
+
+  .hero-metrics { gap: 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="progress-bar"></div>
+
+<!-- ══ NAVIGATION ══ -->
+<nav>
+  <a href="#hero" class="nav-logo">&lt;SK /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" class="nav-cta">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- ══ SIDEBAR LEFT — Socials ══ -->
+<aside class="sidebar-left">
+  <!-- GitHub -->
+  <a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" title="GitHub">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    </svg>
+  </a>
+  <!-- LinkedIn -->
+  <a href="https://linkedin.com/in/stanelykimani" target="_blank" rel="noopener" title="LinkedIn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+    </svg>
+  </a>
+  <!-- Email -->
+  <a href="mailto:Kimanistanley45@gmail.com" title="Email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+      <polyline points="22,6 12,13 2,6"/>
+    </svg>
+  </a>
+</aside>
+
+<!-- ══ SIDEBAR RIGHT — Email ══ -->
+<aside class="sidebar-right">
+  <a href="mailto:Kimanistanley45@gmail.com">Kimanistanley45@gmail.com</a>
+</aside>
+
+<main>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section id="hero">
+    <span class="hero-greeting">Hi, my name is</span>
+    <h1 class="hero-name">Stanely Kimani.</h1>
+    <h2 class="hero-role">I build systems that scale.</h2>
+    <p class="hero-desc">
+      Senior Full-Stack Engineer & ICT Systems Administrator based in <strong>Nairobi, Kenya</strong>.
+      I architect and deliver enterprise-grade software — replacing spreadsheet-driven operations
+      with secure, auditable, production-ready systems.
+    </p>
+
+    <div class="hero-metrics reveal">
+      <div class="metric">
+        <span class="metric-number">4</span>
+        <span class="metric-label">Production Systems</span>
+      </div>
+      <div class="metric">
+        <span class="metric-number">500+</span>
+        <span class="metric-label">Properties Managed</span>
+      </div>
+      <div class="metric">
+        <span class="metric-number">130K+</span>
+        <span class="metric-label">Records Reconciled</span>
+      </div>
+      <div class="metric">
+        <span class="metric-number">22,070</span>
+        <span class="metric-label">PII Records Encrypted</span>
+      </div>
+    </div>
+
+    <div class="hero-ctas reveal">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="StanelyKimaniMacharia_CV.pdf" target="_blank" class="btn-secondary">Download CV</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════ -->
+  <section id="about">
+    <div class="section-heading reveal">
+      <span class="num">01.</span>
+      <h2>About Me</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a full-stack engineer with a deep focus on building systems that solve real operational problems
+          at scale. Over the past several years at <strong>Chabrin Agencies</strong>, I have architected and
+          delivered four production systems from the ground up — eliminating 100% of spreadsheet-based
+          workflows across property management, payroll, and field operations.
+        </p>
+        <p>
+          My work goes beyond shipping features. I diagnose deep data problems: resolving
+          <strong>FIFO allocation failures across 130,000+ financial records</strong>, executing
+          live zero-downtime <strong>AES-256-CBC encryption of 22,070 PII values</strong> in production,
+          and resyncing fractured ledger tables (CHTACC ↔ CHTNTRS) using targeted SQL with zero data loss.
+        </p>
+        <p>
+          I also manage the full ICT infrastructure — LAN/WAN/VPN networking, Windows Server, Active Directory,
+          and a DigitalOcean production pipeline running PHP 8.4, Nginx, and automated PostgreSQL backups.
+        </p>
+
+        <div class="skills-grid" style="margin-top:28px">
+          <div class="skill-item">Laravel 11/12</div>
+          <div class="skill-item">Flutter & Dart</div>
+          <div class="skill-item">PostgreSQL 16</div>
+          <div class="skill-item">Firebase Suite</div>
+          <div class="skill-item">PHP 8.2+</div>
+          <div class="skill-item">BLoC / Clean Arch</div>
+          <div class="skill-item">DigitalOcean / Nginx</div>
+          <div class="skill-item">Advanced SQL / CTEs</div>
+          <div class="skill-item">AES-256-CBC / OTP</div>
+          <div class="skill-item">REST APIs / Sanctum</div>
+          <div class="skill-item">Filament Admin</div>
+          <div class="skill-item">Google ML Kit OCR</div>
+        </div>
+      </div>
+
+      <div class="about-card reveal">
+        <h3>At a Glance</h3>
+        <div class="stat-row">
+          <span class="stat-label">Current Role</span>
+          <span class="stat-value">Software Engineer</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Company</span>
+          <span class="stat-value">Chabrin Agencies</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Location</span>
+          <span class="stat-value">Nairobi, Kenya</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Backend</span>
+          <span class="stat-value">Laravel · PHP</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Mobile</span>
+          <span class="stat-value">Flutter · Dart</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Database</span>
+          <span class="stat-value">PostgreSQL · MySQL</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Infrastructure</span>
+          <span class="stat-value">DigitalOcean · Nginx</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">GitHub</span>
+          <span class="stat-value"><a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">Stan-Mash</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       EXPERIENCE
+  ══════════════════════════════════════ -->
+  <section id="experience">
+    <div class="section-heading reveal">
+      <span class="num">02.</span>
+      <h2>Where I've Worked</h2>
+    </div>
+
+    <div class="experience-layout reveal">
+      <div class="exp-tabs" role="tablist">
+        <button class="exp-tab active" role="tab" onclick="switchTab(0)">Chabrin</button>
+        <button class="exp-tab" role="tab" onclick="switchTab(1)">OlPejeta</button>
+        <button class="exp-tab" role="tab" onclick="switchTab(2)">ICT Admin</button>
+      </div>
+
+      <div>
+        <!-- Tab 0: Chabrin -->
+        <div class="exp-panel active" id="tab-0">
+          <div class="exp-title">Software Engineer <span>@ Chabrin Agencies</span></div>
+          <div class="exp-meta">2023 — Present · Nairobi, Kenya</div>
+          <ul class="exp-bullets">
+            <li>Architected and delivered <strong>4 production systems</strong> (ERP, Lease Management, Field Officer App, Landlord Portal) from scratch — replacing 100% of spreadsheet-driven workflows across the organisation.</li>
+            <li>Resolved systemic <strong>FIFO allocation failures across 130,000+ financial records</strong> using CTEs and self-joins to audit and reconcile ledger discrepancies with zero data loss.</li>
+            <li>Executed live <strong>zero-downtime AES-256-CBC encryption of 22,070 PII records</strong> in production — national IDs, passport numbers, and KRA PINs migrated without service interruption.</li>
+            <li>Resynced fractured ledger tables (CHTACC ↔ CHTNTRS) using targeted SQL concurrency troubleshooting, recovering historical data integrity across the accounting database.</li>
+            <li>Manage DigitalOcean production pipeline (PHP 8.4, Nginx, opcache) with automated daily and weekly PostgreSQL backups — 30-day and 90-day retention respectively.</li>
+            <li>Maintain organisation-wide hardware/software infrastructure, enforce ICT security policies, and manage LAN/WAN/VPN networking across all offices.</li>
+          </ul>
+        </div>
+
+        <!-- Tab 1: OlPejeta -->
+        <div class="exp-panel" id="tab-1">
+          <div class="exp-title">ICT Technician <span>@ Ol Pejeta Conservancy</span></div>
+          <div class="exp-meta">2021 — 2023 · Laikipia, Kenya</div>
+          <ul class="exp-bullets">
+            <li>Administered and maintained the full ICT infrastructure across a large wildlife conservancy — servers, networking, and end-user devices for 300+ staff.</li>
+            <li>Managed Windows Server environments including Active Directory, Group Policy, and DNS/DHCP configuration for site-wide operations.</li>
+            <li>Diagnosed and resolved LAN/WAN connectivity issues, maintained VPN tunnels between remote field stations and the main campus.</li>
+            <li>Delivered staff training on digital tools, data management, and cybersecurity best practices across all departments.</li>
+            <li>Supported hardware procurement, lifecycle management, and vendor coordination for ICT equipment refreshes.</li>
+          </ul>
+        </div>
+
+        <!-- Tab 2: ICT Admin -->
+        <div class="exp-panel" id="tab-2">
+          <div class="exp-title">ICT Systems Administrator <span>@ Various</span></div>
+          <div class="exp-meta">2019 — 2021 · Kenya</div>
+          <ul class="exp-bullets">
+            <li>Provided Tier 1–3 technical support across hardware, software, and network infrastructure for enterprise and SMB clients.</li>
+            <li>Installed, configured, and maintained Cisco routing and switching equipment across multiple client sites.</li>
+            <li>Managed backup and disaster recovery procedures, ensuring RPO/RTO targets were met for critical business systems.</li>
+            <li>Deployed and supported Microsoft 365 environments including Exchange Online, SharePoint, and Teams for client organisations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PROJECTS
+  ══════════════════════════════════════ -->
+  <section id="projects">
+    <div class="section-heading reveal">
+      <span class="num">03.</span>
+      <h2>Things I've Built</h2>
+    </div>
+
+    <!-- FEATURED PROJECTS -->
+    <div class="featured-projects">
+
+      <!-- Project 1: Lease Management -->
+      <div class="feat-project reveal">
+        <div class="feat-visual">
+          <div class="feat-visual-inner">
+            <div class="arch-diagram"><span class="accent">// Lease Workflow Engine</span>
+<span class="blue">Tenant</span> → Sign Request → <span class="accent">OTP Portal</span>
+          ↓
+<span class="white">27-State Workflow</span>
+          ↓
+<span class="blue">Landlord</span> → Approve → <span class="accent">DOMPDF Sign</span>
+          ↓
+<span class="white">DigitalOcean Production</span>
+   PHP 8.4 · Nginx · PostgreSQL
+
+<span class="accent">22,070</span> PII records encrypted
+<span class="accent">AES-256-CBC</span> · zero downtime</div>
+          </div>
+        </div>
+        <div class="feat-content">
+          <div class="feat-overline">Featured Project</div>
+          <div class="feat-name">Lease Management System</div>
+          <div class="feat-desc">
+            Enterprise lease management platform for 500+ properties and 1,000+ tenants.
+            Built a 27-state workflow engine with multi-party digital signing, OTP portals,
+            and PDF generation. Executed live AES-256-CBC encryption of 22,070 PII records
+            in production with zero downtime.
+          </div>
+          <div class="feat-result">
+            <span class="result-pill">22,070 PII records encrypted</span>
+            <span class="result-pill">27-state workflow</span>
+            <span class="result-pill">Live in production</span>
+          </div>
+          <div class="feat-tech">
+            <span class="tech-tag">Laravel 11</span>
+            <span class="tech-tag">Filament 4.5</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">DOMPDF</span>
+            <span class="tech-tag">DigitalOcean</span>
+          </div>
+          <div class="feat-links">
+            <a href="https://github.com/Stan-Mash/lease-management-casestudy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Case Study
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: Chab-CHIPS ERP -->
+      <div class="feat-project reverse reveal">
+        <div class="feat-visual">
+          <div class="feat-visual-inner">
+            <div class="arch-diagram"><span class="accent">// Chab-CHIPS ERP</span>
+<span class="white">52 Controllers · 89 Migrations</span>
+<span class="white">43 RBAC Roles · Google 2FA</span>
+
+<span class="blue">Payroll Engine</span>
+  PAYE · NHIF · NSSF · Housing Levy
+  BCMath precision arithmetic
+
+<span class="blue">Discipline Tracker</span>
+  24 tables · full audit trail
+
+<span class="accent">130,000+</span> FIFO records reconciled
+MySQL → PostgreSQL migration</div>
+          </div>
+        </div>
+        <div class="feat-content">
+          <div class="feat-overline">Featured Project</div>
+          <div class="feat-name">Chab-CHIPS Enterprise ERP</div>
+          <div class="feat-desc">
+            Full-featured ERP system covering property management, payroll, HR discipline tracking,
+            and financial reconciliation. Resolved systemic FIFO allocation failures across 130,000+
+            records using CTEs and self-joins. Migrated from MySQL to PostgreSQL with zero data loss.
+          </div>
+          <div class="feat-result">
+            <span class="result-pill">130K+ records reconciled</span>
+            <span class="result-pill">43 RBAC roles</span>
+            <span class="result-pill">52 controllers</span>
+          </div>
+          <div class="feat-tech">
+            <span class="tech-tag">Laravel 12</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Laratrust</span>
+            <span class="tech-tag">Google 2FA</span>
+            <span class="tech-tag">BCMath</span>
+          </div>
+          <div class="feat-links">
+            <a href="https://github.com/Stan-Mash/chab-chips-casestudy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Case Study
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OTHER PROJECTS -->
+    <div class="other-projects-heading reveal">
+      <span>Other Noteworthy Projects</span>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Field Officer App -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Stan-Mash/field-officer-app-casestudy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="proj-name">Field Officer Mobile App</div>
+        <div class="proj-desc">
+          Offline-first Flutter app for field agents. Clean Architecture, BLoC state management,
+          Drift ORM for local persistence, and Google ML Kit OCR for document scanning.
+          16 modules, 161 commits, v2.4-alpha.
+        </div>
+        <div class="proj-tech">
+          <span>Flutter</span><span>BLoC</span><span>Drift ORM</span><span>ML Kit</span><span>Firebase</span>
+        </div>
+      </div>
+
+      <!-- Landlord Portal -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Stan-Mash/landlord-portal-casestudy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="proj-name">Landlord Self-Service Portal</div>
+        <div class="proj-desc">
+          Mobile and web portal for landlords to view real-time portfolio analytics, occupancy rates,
+          and financial summaries. Custom Flutter chart and local storage packages.
+          92 commits, v1.0.0 production release.
+        </div>
+        <div class="proj-tech">
+          <span>Flutter</span><span>Firebase</span><span>BLoC</span><span>Charts</span><span>Mason</span>
+        </div>
+      </div>
+
+      <!-- ICT Infrastructure -->
+      <div class="proj-card reveal">
+        <div class="proj-top">
+          <div class="proj-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+        </div>
+        <div class="proj-name">Production Infrastructure</div>
+        <div class="proj-desc">
+          DigitalOcean production pipeline running PHP 8.4, Nginx, opcache with
+          <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">validate_timestamps=0</code>.
+          Automated daily + weekly PostgreSQL backups with 30-day and 90-day retention.
+          Zero-downtime deployment workflow.
+        </div>
+        <div class="proj-tech">
+          <span>DigitalOcean</span><span>Nginx</span><span>PHP 8.4</span><span>PostgreSQL</span><span>Linux</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-overline">04. What's Next?</div>
+    <h2 class="contact-heading">Get In Touch</h2>
+    <p class="contact-sub">
+      I'm currently open to new opportunities. Whether you have a role in mind, a system
+      to build, or just want to connect — my inbox is open and I respond within 48 hours.
+    </p>
+    <a href="mailto:Kimanistanley45@gmail.com" class="contact-email">
+      Say Hello →
+    </a>
+    <div class="contact-links">
+      <a href="https://github.com/Stan-Mash" target="_blank" rel="noopener">GitHub</a>
+      <a href="StanelyKimaniMacharia_CV.pdf" target="_blank">Download CV</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Designed & Built by <a href="https://github.com/Stan-Mash">Stanely Kimani Macharia</a></p>
+</footer>
+
+<script>
+// Tab switcher for experience section
+function switchTab(index) {
+  document.querySelectorAll('.exp-tab').forEach((t, i) => {
+    t.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.exp-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === index);
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Stagger project cards
+document.querySelectorAll('.proj-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.1}s`;
+});
+</script>
+
+</body>
+</html>
