@@ -3,881 +3,643 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Stanely Kimani Macharia — Senior Full-Stack Engineer</title>
-<meta name="description" content="Senior Full-Stack Engineer & ICT Systems Administrator based in Nairobi, Kenya. Laravel, Flutter, PostgreSQL, DigitalOcean."/>
+<title>Stanely Kimani Macharia — Full-Stack Engineer & ICT Systems Administrator</title>
+<meta name="description" content="Senior Full-Stack Software Engineer, Database Administrator and ICT Systems Administrator based in Nairobi, Kenya."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 
-/* ══════════════════════════════════════════════
-   RESET & BASE
-══════════════════════════════════════════════ */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+/* ═══════════════════════════════════════════
+   FONTS — Century Gothic stack (no Google needed)
+═══════════════════════════════════════════ */
 :root {
-  --bg:        #0a192f;
-  --bg2:       #112240;
-  --bg3:       #1d3557;
-  --accent:    #64ffda;
-  --accent2:   #57cbff;
-  --text:      #ccd6f6;
-  --text-muted:#8892b0;
-  --white:     #e6f1ff;
-  --font:      'Inter', sans-serif;
-  --mono:      'Fira Code', monospace;
-  --max:       1100px;
-  --radius:    8px;
-  --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+  --font-body: 'Century Gothic', CenturyGothic, AppleGothic, 'Trebuchet MS', Arial, sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+
+  /* Palette — vibrant navy/coral/teal */
+  --navy:      #0f3460;
+  --navy-dark: #0a1f3d;
+  --navy-mid:  #16213e;
+  --coral:     #e94560;
+  --teal:      #00c9a7;
+  --gold:      #f7b731;
+  --sky:       #57cbff;
+
+  --bg:        #0a1628;
+  --bg2:       #0f2040;
+  --bg3:       #162845;
+  --card:      #0d1e35;
+
+  --text:      #dce8fa;
+  --text-muted:#7a9cc4;
+  --white:     #f0f6ff;
+
+  --radius:    10px;
+  --max:       1120px;
+  --ease:      cubic-bezier(0.645,0.045,0.355,1);
 }
 
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
-/* ══════════════════════════════════════════════
-   SCROLL PROGRESS BAR
-══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════════════════ */
 .progress-bar {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  z-index: 9999;
+  position: fixed; top:0; left:0; width:100%; height:3px;
+  background: linear-gradient(90deg, var(--coral), var(--teal), var(--gold));
   transform-origin: left;
-  animation: progress-grow linear;
-  animation-timeline: scroll(root);
+  transform: scaleX(0);
+  z-index: 9999;
+  transition: transform 0.1s linear;
 }
-@keyframes progress-grow { to { transform: scaleX(1); } }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    SCROLL REVEAL
-══════════════════════════════════════════════ */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-}
+═══════════════════════════════════════════ */
+.reveal { opacity:0; transform:translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; transition:none; } }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    NAVIGATION
-══════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 nav {
-  position: fixed;
-  top: 0; width: 100%;
-  padding: 0 48px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(10,25,47,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(100,255,218,0.08);
+  position: fixed; top:0; width:100%;
+  height: 68px;
+  padding: 0 56px;
+  display: flex; align-items:center; justify-content:space-between;
+  background: rgba(10,22,40,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(233,69,96,0.15);
   z-index: 1000;
-  transition: var(--transition);
 }
 
 .nav-logo {
-  font-family: var(--mono);
-  font-size: 20px;
-  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--coral);
   text-decoration: none;
   letter-spacing: -0.5px;
 }
+.nav-logo span { color: var(--teal); }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  list-style: none;
-}
-
+.nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
 .nav-links a {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
   text-decoration: none;
-  transition: var(--transition);
-  counter-increment: nav-item;
+  transition: color 0.2s;
 }
-
-.nav-links a::before {
-  color: var(--accent);
-  margin-right: 4px;
-}
-
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--teal); }
 
 .nav-cta {
-  padding: 10px 20px;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  color: var(--accent) !important;
-  font-family: var(--mono);
-  font-size: 13px;
+  padding: 9px 20px;
+  border: 1px solid var(--coral);
+  border-radius: 6px;
+  color: var(--coral) !important;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
   text-decoration: none;
-  transition: var(--transition);
+  transition: all 0.2s;
 }
-.nav-cta:hover {
-  background: rgba(100,255,218,0.08);
-}
+.nav-cta:hover { background: rgba(233,69,96,0.1); }
 
-/* ══════════════════════════════════════════════
-   SIDEBAR SOCIALS (fixed left)
-══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   SIDEBARS
+═══════════════════════════════════════════ */
 .sidebar-left {
-  position: fixed;
-  left: 32px;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  z-index: 100;
+  position:fixed; left:28px; bottom:0;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+  z-index:100;
 }
 .sidebar-left::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 80px;
-  background: var(--text-muted);
-  margin-top: 8px;
+  content:''; display:block; width:1px; height:80px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
 }
-
-.sidebar-left a {
-  color: var(--text-muted);
-  transition: var(--transition);
-  display: flex;
-}
-.sidebar-left a:hover {
-  color: var(--accent);
-  transform: translateY(-3px);
-}
-.sidebar-left svg { width: 20px; height: 20px; }
+.sidebar-left a { color:var(--text-muted); transition:all 0.2s; display:flex; }
+.sidebar-left a:hover { color:var(--teal); transform:translateY(-3px); }
+.sidebar-left svg { width:19px; height:19px; }
 
 .sidebar-right {
-  position: fixed;
-  right: 32px;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  z-index: 100;
+  position:fixed; right:28px; bottom:0;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  z-index:100;
 }
 .sidebar-right::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 80px;
-  background: var(--text-muted);
-  margin-top: 8px;
+  content:''; display:block; width:1px; height:80px;
+  background: linear-gradient(to bottom, var(--text-muted), transparent);
 }
 .sidebar-right a {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-muted);
-  text-decoration: none;
-  writing-mode: vertical-rl;
-  letter-spacing: 2px;
-  transition: var(--transition);
+  font-family:var(--font-mono); font-size:11.5px;
+  color:var(--text-muted); text-decoration:none;
+  writing-mode:vertical-rl; letter-spacing:2px;
+  transition:all 0.2s;
 }
-.sidebar-right a:hover {
-  color: var(--accent);
-  transform: translateY(-3px);
-}
+.sidebar-right a:hover { color:var(--teal); transform:translateY(-3px); }
 
-/* ══════════════════════════════════════════════
-   MAIN CONTENT WRAPPER
-══════════════════════════════════════════════ */
-main {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 100px;
-}
+/* ═══════════════════════════════════════════
+   MAIN WRAPPER
+═══════════════════════════════════════════ */
+main { max-width:var(--max); margin:0 auto; padding:0 96px; }
+section { padding:88px 0; }
 
-section {
-  padding: 80px 0;
-}
-
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    SECTION HEADINGS
-══════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 .section-heading {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 48px;
-  white-space: nowrap;
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:52px; white-space:nowrap;
 }
 .section-heading .num {
-  font-family: var(--mono);
-  font-size: 20px;
-  color: var(--accent);
+  font-family:var(--font-mono); font-size:18px; color:var(--coral);
 }
 .section-heading h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -0.5px;
+  font-size:26px; font-weight:800; color:var(--white); letter-spacing:-0.5px;
 }
 .section-heading::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: var(--bg3);
+  content:''; display:block; flex:1; height:1px;
+  background: linear-gradient(90deg, var(--bg3), transparent);
 }
 
-/* ══════════════════════════════════════════════
-   HERO SECTION
-══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
 #hero {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 70px;
+  display: flex; flex-direction:column; justify-content:center;
+  padding-top: 68px;
+  position: relative;
 }
 
+/* animated background blobs */
+#hero::before {
+  content:'';
+  position:absolute; top:-100px; right:-200px;
+  width:600px; height:600px;
+  background: radial-gradient(circle, rgba(233,69,96,0.12) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+  animation: blob1 8s ease-in-out infinite alternate;
+}
+#hero::after {
+  content:'';
+  position:absolute; bottom:-100px; left:-150px;
+  width:500px; height:500px;
+  background: radial-gradient(circle, rgba(0,201,167,0.10) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+  animation: blob2 10s ease-in-out infinite alternate;
+}
+@keyframes blob1 { from{transform:translate(0,0) scale(1);} to{transform:translate(40px,60px) scale(1.1);} }
+@keyframes blob2 { from{transform:translate(0,0) scale(1);} to{transform:translate(-30px,40px) scale(1.08);} }
+
+#hero > * { position:relative; z-index:1; }
+
 .hero-greeting {
-  font-family: var(--mono);
-  font-size: 16px;
-  color: var(--accent);
-  margin-bottom: 16px;
-  display: block;
+  font-family:var(--font-mono); font-size:15px; color:var(--teal);
+  margin-bottom:14px; display:block;
 }
 
 .hero-name {
-  font-size: clamp(40px, 7vw, 76px);
-  font-weight: 800;
-  color: var(--white);
-  line-height: 1.1;
-  letter-spacing: -2px;
-  margin-bottom: 8px;
+  font-size: clamp(38px,7vw,74px);
+  font-weight:800; color:var(--white);
+  line-height:1.05; letter-spacing:-2px; margin-bottom:6px;
 }
+.hero-name em { color:var(--coral); font-style:normal; }
 
 .hero-role {
-  font-size: clamp(28px, 5vw, 56px);
-  font-weight: 700;
-  color: var(--text-muted);
-  line-height: 1.1;
-  letter-spacing: -1.5px;
-  margin-bottom: 28px;
+  font-size: clamp(20px,3.5vw,38px);
+  font-weight:700; color:var(--text-muted);
+  line-height:1.2; letter-spacing:-0.5px; margin-bottom:28px;
 }
 
 .hero-desc {
-  max-width: 560px;
-  font-size: 17px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 40px;
+  max-width:580px; font-size:17px;
+  color:var(--text-muted); line-height:1.75; margin-bottom:36px;
 }
+.hero-desc strong { color:var(--teal); }
 
-.hero-desc strong {
-  color: var(--accent);
-}
-
+/* Metric strip */
 .hero-metrics {
-  display: flex;
-  gap: 40px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
+  display:flex; gap:0; margin-bottom:44px;
+  border:1px solid rgba(233,69,96,0.2);
+  border-radius:var(--radius);
+  overflow:hidden; max-width:620px;
 }
-
 .metric {
-  display: flex;
-  flex-direction: column;
+  flex:1; padding:16px 20px;
+  border-right:1px solid rgba(233,69,96,0.15);
+  background: rgba(15,52,96,0.3);
+  transition: background 0.2s;
 }
+.metric:last-child { border-right:none; }
+.metric:hover { background: rgba(233,69,96,0.08); }
 .metric-number {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -1px;
+  font-size:24px; font-weight:800;
+  color:var(--coral); letter-spacing:-1px;
+  display:block;
 }
 .metric-label {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
+  font-family:var(--font-mono); font-size:10.5px;
+  color:var(--text-muted); letter-spacing:0.5px;
+  display:block; margin-top:2px;
 }
 
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+/* CTAs */
+.hero-ctas { display:flex; gap:16px; flex-wrap:wrap; }
 
 .btn-primary {
-  padding: 16px 32px;
-  background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 14px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: var(--transition);
-  cursor: pointer;
+  padding:14px 32px;
+  background: linear-gradient(135deg, var(--coral), #c73652);
+  color:#fff; font-family:var(--font-body);
+  font-size:15px; font-weight:700;
+  border-radius:var(--radius); text-decoration:none;
+  border:none; cursor:pointer;
+  transition:all 0.2s;
+  box-shadow: 0 4px 20px rgba(233,69,96,0.35);
 }
 .btn-primary:hover {
-  background: rgba(100,255,218,0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
+  transform:translateY(-3px);
+  box-shadow: 0 8px 28px rgba(233,69,96,0.5);
 }
 
 .btn-secondary {
-  padding: 16px 32px;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius);
-  text-decoration: none;
-  border: 1px solid var(--accent);
-  transition: var(--transition);
+  padding:14px 32px;
+  background:transparent;
+  color:var(--teal); font-family:var(--font-body);
+  font-size:15px; font-weight:700;
+  border-radius:var(--radius); text-decoration:none;
+  border:1px solid var(--teal); cursor:pointer;
+  transition:all 0.2s;
 }
 .btn-secondary:hover {
-  background: transparent;
-  color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
+  background:rgba(0,201,167,0.08);
+  transform:translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,201,167,0.2);
 }
 
-/* ══════════════════════════════════════════════
-   ABOUT SECTION
-══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
 .about-grid {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 64px;
-  align-items: start;
+  display:grid; grid-template-columns:3fr 2fr;
+  gap:56px; align-items:start;
 }
 
 .about-text p {
-  color: var(--text-muted);
-  margin-bottom: 16px;
-  font-size: 17px;
-  line-height: 1.75;
+  color:var(--text-muted); margin-bottom:16px;
+  font-size:16.5px; line-height:1.75;
 }
-
-.about-text p strong {
-  color: var(--accent);
-}
+.about-text p strong { color:var(--teal); }
 
 .skills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-top: 24px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:6px; margin-top:28px;
 }
-
 .skill-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-muted);
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:12.5px; color:var(--text-muted);
 }
-.skill-item::before {
-  content: '▹';
-  color: var(--accent);
-  font-size: 12px;
-  flex-shrink: 0;
-}
+.skill-item::before { content:'▹'; color:var(--coral); font-size:11px; flex-shrink:0; }
 
+/* About stat card */
 .about-card {
-  background: var(--bg2);
-  border: 1px solid rgba(100,255,218,0.1);
-  border-radius: var(--radius);
-  padding: 28px;
+  background: var(--card);
+  border:1px solid rgba(233,69,96,0.2);
+  border-top:3px solid var(--coral);
+  border-radius:var(--radius);
+  padding:28px; position:sticky; top:90px;
 }
-
 .about-card h3 {
-  font-size: 13px;
-  font-family: var(--mono);
-  color: var(--accent);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  font-family:var(--font-mono); font-size:11px;
+  color:var(--coral); letter-spacing:2.5px;
+  text-transform:uppercase; margin-bottom:20px;
 }
-
 .stat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);
 }
-.stat-row:last-child { border-bottom: none; }
-.stat-label {
-  font-size: 13px;
-  color: var(--text-muted);
-}
+.stat-row:last-child { border-bottom:none; }
+.stat-label { font-size:13px; color:var(--text-muted); }
 .stat-value {
-  font-family: var(--mono);
-  font-size: 14px;
-  color: var(--white);
-  font-weight: 600;
+  font-family:var(--font-mono); font-size:13px;
+  color:var(--white); font-weight:600; text-align:right;
+}
+.stat-value a { color:var(--teal); text-decoration:none; }
+
+/* Contact detail rows */
+.contact-detail {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.contact-detail:last-child { border-bottom:none; }
+.contact-detail .icon { font-size:15px; flex-shrink:0; }
+.contact-detail a, .contact-detail span {
+  font-family:var(--font-mono); font-size:12px;
+  color:var(--white); text-decoration:none;
+}
+.contact-detail a:hover { color:var(--teal); }
+
+/* ═══════════════════════════════════════════
+   SERVICES SECTION
+═══════════════════════════════════════════ */
+.services-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
 }
 
-/* ══════════════════════════════════════════════
-   EXPERIENCE SECTION
-══════════════════════════════════════════════ */
+.service-card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius);
+  padding:28px 24px;
+  transition:all 0.25s var(--ease);
+  position:relative; overflow:hidden;
+}
+.service-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--coral); transform:scaleX(0); transform-origin:left;
+  transition:transform 0.25s var(--ease);
+}
+.service-card:hover { transform:translateY(-6px); border-color:rgba(233,69,96,0.25); box-shadow:0 16px 40px rgba(0,0,0,0.4); }
+.service-card:hover::before { transform:scaleX(1); }
+
+.service-icon { font-size:32px; margin-bottom:14px; display:block; }
+.service-title { font-size:16px; font-weight:800; color:var(--white); margin-bottom:10px; }
+.service-desc { font-size:14px; color:var(--text-muted); line-height:1.65; }
+.service-tags {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;
+}
+.service-tag {
+  font-family:var(--font-mono); font-size:10.5px;
+  padding:3px 9px; border-radius:20px;
+  background:rgba(233,69,96,0.1);
+  border:1px solid rgba(233,69,96,0.25);
+  color:var(--coral);
+}
+
+/* ═══════════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════════ */
 .experience-layout {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 0;
+  display:grid; grid-template-columns:180px 1fr; gap:0;
 }
 
 .exp-tabs {
-  display: flex;
-  flex-direction: column;
-  border-left: 2px solid var(--bg3);
+  display:flex; flex-direction:column;
+  border-left:2px solid var(--bg3);
 }
-
 .exp-tab {
-  padding: 14px 20px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  margin-left: -2px;
-  transition: var(--transition);
-  background: none;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  text-align: left;
-  white-space: nowrap;
+  padding:13px 18px;
+  font-family:var(--font-mono); font-size:12.5px;
+  color:var(--text-muted); cursor:pointer;
+  border-left:2px solid transparent; margin-left:-2px;
+  border-top:none; border-right:none; border-bottom:none;
+  background:none; text-align:left; white-space:nowrap;
+  transition:all 0.2s;
 }
-.exp-tab:hover {
-  color: var(--accent);
-  background: rgba(100,255,218,0.05);
-}
-.exp-tab.active {
-  color: var(--accent);
-  border-left-color: var(--accent);
-  background: rgba(100,255,218,0.05);
-}
+.exp-tab:hover { color:var(--teal); background:rgba(0,201,167,0.05); }
+.exp-tab.active { color:var(--teal); border-left-color:var(--teal); background:rgba(0,201,167,0.05); }
 
-.exp-panel {
-  display: none;
-  padding: 0 32px;
-  animation: fadeIn 0.3s ease;
-}
-.exp-panel.active { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+.exp-panel { display:none; padding:0 36px; animation:fadeIn 0.3s ease; }
+.exp-panel.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateX(12px);} to{opacity:1;transform:translateX(0);} }
 
 .exp-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 4px;
+  font-size:21px; font-weight:800; color:var(--white); margin-bottom:4px;
 }
-.exp-title span {
-  color: var(--accent);
-}
+.exp-title span { color:var(--teal); }
+.exp-company { font-size:13px; color:var(--coral); font-weight:700; margin-bottom:4px; }
 .exp-meta {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 24px;
+  font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-bottom:24px;
 }
-.exp-bullets {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.exp-bullets { list-style:none; display:flex; flex-direction:column; gap:12px; }
 .exp-bullets li {
-  display: flex;
-  gap: 12px;
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.6;
+  display:flex; gap:12px; font-size:15px;
+  color:var(--text-muted); line-height:1.65;
 }
-.exp-bullets li::before {
-  content: '▹';
-  color: var(--accent);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.exp-bullets strong {
-  color: var(--text);
-}
+.exp-bullets li::before { content:'▹'; color:var(--coral); flex-shrink:0; margin-top:3px; }
+.exp-bullets li b { color:var(--white); }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    FEATURED PROJECTS
-══════════════════════════════════════════════ */
-.featured-projects {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
+═══════════════════════════════════════════ */
+.featured-projects { display:flex; flex-direction:column; gap:72px; }
 
 .feat-project {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  align-items: center;
-  position: relative;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:0; align-items:center;
 }
+.feat-project.reverse { direction:rtl; }
+.feat-project.reverse > * { direction:ltr; }
 
-.feat-project.reverse {
-  direction: rtl;
-}
-.feat-project.reverse > * {
-  direction: ltr;
-}
-
-.feat-visual {
-  position: relative;
-  z-index: 1;
-}
-
+/* Visual panel */
 .feat-visual-inner {
-  background: var(--bg2);
-  border: 1px solid rgba(100,255,218,0.12);
-  border-radius: var(--radius);
-  padding: 32px;
-  position: relative;
-  overflow: hidden;
-  transition: var(--transition);
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background:var(--card);
+  border:1px solid rgba(0,201,167,0.15);
+  border-radius:var(--radius); padding:28px;
+  min-height:260px; display:flex; flex-direction:column; justify-content:center;
+  position:relative; overflow:hidden;
+  transition:all 0.25s var(--ease);
 }
 .feat-visual-inner:hover {
-  border-color: rgba(100,255,218,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border-color:rgba(0,201,167,0.35);
+  transform:translateY(-4px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
 }
-
 .feat-visual-inner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(100,255,218,0.04) 0%, transparent 60%);
-  pointer-events: none;
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(0,201,167,0.04) 0%, transparent 60%);
+  pointer-events:none;
 }
-
 .arch-diagram {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-muted);
-  line-height: 1.8;
-  white-space: pre;
+  font-family:var(--font-mono); font-size:11px;
+  color:var(--text-muted); line-height:1.9; white-space:pre;
 }
-.arch-diagram .accent { color: var(--accent); }
-.arch-diagram .blue { color: var(--accent2); }
-.arch-diagram .white { color: var(--white); }
+.arch-diagram .c  { color:var(--coral); }
+.arch-diagram .t  { color:var(--teal); }
+.arch-diagram .w  { color:var(--white); }
+.arch-diagram .g  { color:var(--gold); }
 
-.feat-content {
-  padding: 0 32px;
-  position: relative;
-  z-index: 2;
-}
+/* Content panel */
+.feat-content { padding:0 36px; }
 
 .feat-overline {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--accent);
-  margin-bottom: 12px;
+  font-family:var(--font-mono); font-size:12.5px;
+  color:var(--teal); margin-bottom:10px;
 }
-
 .feat-name {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 20px;
-  line-height: 1.2;
+  font-size:22px; font-weight:800;
+  color:var(--white); margin-bottom:18px; line-height:1.2;
 }
-
 .feat-desc {
-  background: var(--bg2);
-  border: 1px solid rgba(100,255,218,0.08);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  background:var(--bg2);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius); padding:18px 22px;
+  font-size:14.5px; color:var(--text-muted); line-height:1.7; margin-bottom:16px;
 }
-
-.feat-result {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
+.feat-result { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
 .result-pill {
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 6px 12px;
-  background: rgba(100,255,218,0.08);
-  border: 1px solid rgba(100,255,218,0.2);
-  border-radius: 20px;
-  color: var(--accent);
+  font-family:var(--font-mono); font-size:11.5px;
+  padding:5px 12px; border-radius:20px;
+  background:rgba(0,201,167,0.08);
+  border:1px solid rgba(0,201,167,0.25);
+  color:var(--teal);
 }
-
-.feat-tech {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
+.feat-tech { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
 .tech-tag {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-muted);
+  font-family:var(--font-mono); font-size:11.5px; color:var(--text-muted);
 }
-
-.feat-links {
-  display: flex;
-  gap: 16px;
-}
+.feat-links { display:flex; gap:16px; }
 .feat-links a {
-  color: var(--text-muted);
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  text-decoration: none;
+  color:var(--text-muted); transition:all 0.2s;
+  display:flex; align-items:center; gap:6px;
+  font-size:13px; text-decoration:none;
 }
-.feat-links a:hover { color: var(--accent); }
-.feat-links svg { width: 18px; height: 18px; }
+.feat-links a:hover { color:var(--teal); }
+.feat-links svg { width:18px; height:18px; }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    OTHER PROJECTS GRID
-══════════════════════════════════════════════ */
-.other-projects-heading {
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 15px;
-  color: var(--text-muted);
-  margin: 80px 0 40px;
+═══════════════════════════════════════════ */
+.other-heading {
+  text-align:center; font-family:var(--font-mono);
+  font-size:14px; color:var(--text-muted); margin:72px 0 36px;
 }
-.other-projects-heading span { color: var(--accent); }
+.other-heading span { color:var(--coral); }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
+.projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
 
 .proj-card {
-  background: var(--bg2);
-  border: 1px solid rgba(100,255,218,0.08);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius); padding:26px;
+  display:flex; flex-direction:column;
+  transition:all 0.25s var(--ease); position:relative; overflow:hidden;
 }
-.proj-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: var(--transition);
+.proj-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--coral), var(--teal));
+  transform:scaleX(0); transform-origin:left; transition:transform 0.25s var(--ease);
 }
-.proj-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(100,255,218,0.2);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-.proj-card:hover::before { transform: scaleX(1); }
+.proj-card:hover { transform:translateY(-7px); border-color:rgba(0,201,167,0.2); box-shadow:0 20px 48px rgba(0,0,0,0.45); }
+.proj-card:hover::after { transform:scaleX(1); }
 
-.proj-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-.proj-icon {
-  color: var(--accent);
-}
-.proj-icon svg { width: 36px; height: 36px; }
-.proj-links a {
-  color: var(--text-muted);
-  transition: var(--transition);
-}
-.proj-links a:hover { color: var(--accent); }
-.proj-links svg { width: 18px; height: 18px; }
+.proj-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; }
+.proj-icon { color:var(--teal); }
+.proj-icon svg { width:34px; height:34px; }
+.proj-links a { color:var(--text-muted); transition:color 0.2s; }
+.proj-links a:hover { color:var(--teal); }
+.proj-links svg { width:17px; height:17px; }
+.proj-name { font-size:17px; font-weight:800; color:var(--white); margin-bottom:9px; line-height:1.3; }
+.proj-desc { font-size:13.5px; color:var(--text-muted); line-height:1.65; flex-grow:1; margin-bottom:16px; }
+.proj-tech { display:flex; gap:10px; flex-wrap:wrap; margin-top:auto; }
+.proj-tech span { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); }
 
-.proj-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-.proj-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.65;
-  flex-grow: 1;
-  margin-bottom: 20px;
-}
-.proj-tech {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
-.proj-tech span {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-/* ══════════════════════════════════════════════
-   CONTACT SECTION
-══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
 #contact {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 80px 0 120px;
+  text-align:center; max-width:660px;
+  margin:0 auto; padding:80px 0 120px;
 }
-
 .contact-overline {
-  font-family: var(--mono);
-  font-size: 14px;
-  color: var(--accent);
-  margin-bottom: 16px;
+  font-family:var(--font-mono); font-size:14px; color:var(--teal); margin-bottom:14px;
 }
 .contact-heading {
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 800;
-  color: var(--white);
-  letter-spacing: -1.5px;
-  margin-bottom: 20px;
+  font-size:clamp(30px,5vw,50px);
+  font-weight:800; color:var(--white);
+  letter-spacing:-1.5px; margin-bottom:18px;
 }
 .contact-sub {
-  font-size: 17px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 48px;
+  font-size:16.5px; color:var(--text-muted);
+  line-height:1.75; margin-bottom:44px;
 }
 .contact-email {
-  display: inline-block;
-  padding: 18px 40px;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--mono);
-  font-size: 15px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: var(--transition);
-  margin-bottom: 48px;
+  display:inline-block; padding:16px 40px;
+  background:linear-gradient(135deg, var(--coral), #c73652);
+  color:#fff; font-family:var(--font-body);
+  font-size:15px; font-weight:700;
+  border-radius:var(--radius); text-decoration:none;
+  transition:all 0.2s; margin-bottom:20px;
+  box-shadow:0 4px 20px rgba(233,69,96,0.35);
 }
-.contact-email:hover {
-  background: rgba(100,255,218,0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(100,255,218,0.12);
-}
+.contact-email:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(233,69,96,0.5); }
 
-.contact-links {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
+.contact-phone {
+  display:block; margin-bottom:36px;
+  font-family:var(--font-mono); font-size:15px;
+  color:var(--teal); text-decoration:none;
+  transition:color 0.2s;
 }
+.contact-phone:hover { color:var(--white); }
+
+.contact-links { display:flex; justify-content:center; gap:28px; }
 .contact-links a {
-  color: var(--text-muted);
-  font-family: var(--mono);
-  font-size: 13px;
-  text-decoration: none;
-  transition: var(--transition);
-  letter-spacing: 1px;
+  font-family:var(--font-mono); font-size:12.5px;
+  color:var(--text-muted); text-decoration:none;
+  transition:color 0.2s; letter-spacing:1px;
 }
-.contact-links a:hover { color: var(--accent); }
+.contact-links a:hover { color:var(--teal); }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    FOOTER
-══════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 footer {
-  text-align: center;
-  padding: 24px;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align:center; padding:24px;
+  font-family:var(--font-mono); font-size:12px;
+  color:var(--text-muted);
+  border-top:1px solid rgba(255,255,255,0.05);
 }
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-}
+footer a { color:var(--coral); text-decoration:none; }
 
-/* ══════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    RESPONSIVE
-══════════════════════════════════════════════ */
-@media (max-width: 1080px) {
-  main { padding: 0 64px; }
-  .sidebar-left, .sidebar-right { display: none; }
+═══════════════════════════════════════════ */
+@media (max-width:1080px) {
+  main { padding:0 56px; }
+  .sidebar-left, .sidebar-right { display:none; }
 }
-
-@media (max-width: 768px) {
-  main { padding: 0 24px; }
-  nav { padding: 0 24px; }
-  .nav-links { display: none; }
-
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .experience-layout { grid-template-columns: 1fr; }
-  .exp-tabs { flex-direction: row; overflow-x: auto; border-left: none; border-bottom: 2px solid var(--bg3); margin-bottom: 32px; }
-  .exp-tab { border-left: none; border-bottom: 2px solid transparent; margin-left: 0; margin-bottom: -2px; }
-  .exp-tab.active { border-bottom-color: var(--accent); }
-  .exp-panel { padding: 0; }
-
-  .feat-project, .feat-project.reverse { grid-template-columns: 1fr; direction: ltr; }
-  .feat-visual { display: none; }
-  .feat-content { padding: 0; }
-
-  .projects-grid { grid-template-columns: 1fr; }
-
-  .hero-metrics { gap: 24px; }
+@media (max-width:768px) {
+  main { padding:0 22px; }
+  nav { padding:0 22px; }
+  .nav-links { display:none; }
+  .about-grid { grid-template-columns:1fr; gap:36px; }
+  .experience-layout { grid-template-columns:1fr; }
+  .exp-tabs { flex-direction:row; overflow-x:auto; border-left:none; border-bottom:2px solid var(--bg3); margin-bottom:28px; }
+  .exp-tab { border-left:none; border-bottom:2px solid transparent; margin-left:0; margin-bottom:-2px; padding:12px 14px; }
+  .exp-tab.active { border-bottom-color:var(--teal); }
+  .exp-panel { padding:0; }
+  .feat-project, .feat-project.reverse { grid-template-columns:1fr; direction:ltr; }
+  .feat-visual { display:none; }
+  .feat-content { padding:0; }
+  .projects-grid { grid-template-columns:1fr; }
+  .services-grid { grid-template-columns:1fr; }
+  .hero-metrics { flex-direction:column; }
+  .metric { border-right:none; border-bottom:1px solid rgba(233,69,96,0.15); }
 }
 
 </style>
 </head>
 <body>
 
-<!-- Scroll progress bar -->
-<div class="progress-bar"></div>
+<div class="progress-bar" id="progressBar"></div>
 
-<!-- ══ NAVIGATION ══ -->
+<!-- ══ NAV ══ -->
 <nav>
-  <a href="#hero" class="nav-logo">&lt;SK /&gt;</a>
+  <a href="#hero" class="nav-logo">&lt;<span>SK</span> /&gt;</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -885,48 +647,38 @@ footer a {
   </ul>
 </nav>
 
-<!-- ══ SIDEBAR LEFT — Socials ══ -->
+<!-- ══ SIDEBAR LEFT ══ -->
 <aside class="sidebar-left">
-  <!-- GitHub -->
   <a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" title="GitHub">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
   </a>
-  <!-- LinkedIn -->
-  <a href="https://linkedin.com/in/stanelykimani" target="_blank" rel="noopener" title="LinkedIn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-    </svg>
+  <a href="mailto:kimanistanley45@gmail.com" title="Email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
   </a>
-  <!-- Email -->
-  <a href="mailto:Kimanistanley45@gmail.com" title="Email">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-      <polyline points="22,6 12,13 2,6"/>
-    </svg>
+  <a href="tel:+254722123103" title="Phone">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
   </a>
 </aside>
 
-<!-- ══ SIDEBAR RIGHT — Email ══ -->
+<!-- ══ SIDEBAR RIGHT ══ -->
 <aside class="sidebar-right">
-  <a href="mailto:Kimanistanley45@gmail.com">Kimanistanley45@gmail.com</a>
+  <a href="mailto:kimanistanley45@gmail.com">kimanistanley45@gmail.com</a>
 </aside>
 
 <main>
 
-  <!-- ══════════════════════════════════════
+  <!-- ════════════════════════════
        HERO
-  ══════════════════════════════════════ -->
+  ════════════════════════════ -->
   <section id="hero">
     <span class="hero-greeting">Hi, my name is</span>
-    <h1 class="hero-name">Stanely Kimani.</h1>
-    <h2 class="hero-role">I build systems that scale.</h2>
+    <h1 class="hero-name">Stanely Kimani <em>Macharia</em></h1>
+    <h2 class="hero-role">Full-Stack Engineer. Database Admin. ICT Systems Administrator.</h2>
     <p class="hero-desc">
-      Senior Full-Stack Engineer & ICT Systems Administrator based in <strong>Nairobi, Kenya</strong>.
-      I architect and deliver enterprise-grade software — replacing spreadsheet-driven operations
-      with secure, auditable, production-ready systems.
+      I architect and deliver <strong>enterprise-grade software</strong> that replaces manual,
+      spreadsheet-driven operations with secure, auditable, production-ready systems —
+      from ERP platforms and lease management to mobile apps and POS solutions.
+      Based in <strong>Nairobi, Kenya</strong>.
     </p>
 
     <div class="hero-metrics reveal">
@@ -954,9 +706,9 @@ footer a {
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
+  <!-- ════════════════════════════
        ABOUT
-  ══════════════════════════════════════ -->
+  ════════════════════════════ -->
   <section id="about">
     <div class="section-heading reveal">
       <span class="num">01.</span>
@@ -966,221 +718,296 @@ footer a {
     <div class="about-grid">
       <div class="about-text reveal">
         <p>
-          I'm a full-stack engineer with a deep focus on building systems that solve real operational problems
-          at scale. Over the past several years at <strong>Chabrin Agencies</strong>, I have architected and
-          delivered four production systems from the ground up — eliminating 100% of spreadsheet-based
-          workflows across property management, payroll, and field operations.
+          I'm a <strong>Full-Stack Software Engineer, Database Administrator, and ICT Systems
+          Administrator</strong> with 5+ years of experience designing, building, and deploying
+          enterprise-grade web and mobile applications. At Chabrin Agencies, I replaced 100%
+          of spreadsheet-based workflows across property management, HR, payroll, and lease
+          operations with four interconnected production systems.
         </p>
         <p>
-          My work goes beyond shipping features. I diagnose deep data problems: resolving
-          <strong>FIFO allocation failures across 130,000+ financial records</strong>, executing
-          live zero-downtime <strong>AES-256-CBC encryption of 22,070 PII values</strong> in production,
-          and resyncing fractured ledger tables (CHTACC ↔ CHTNTRS) using targeted SQL with zero data loss.
+          My work goes beyond shipping features. I fix deep data problems — resolving systemic
+          <strong>FIFO allocation failures across 130,000+ financial records</strong>, executing live
+          zero-downtime <strong>AES-256-CBC encryption of 22,070 PII records</strong>, and resyncing
+          fractured ledger tables (CHTACC ↔ CHTNTRS) using targeted SQL with zero data loss.
         </p>
         <p>
-          I also manage the full ICT infrastructure — LAN/WAN/VPN networking, Windows Server, Active Directory,
-          and a DigitalOcean production pipeline running PHP 8.4, Nginx, and automated PostgreSQL backups.
+          Beyond software, I deliver <strong>end-to-end ICT solutions</strong> — POS system
+          installations, software deployment, Cisco networking, Windows Server, Active Directory,
+          and full hardware/software support for organisations across Kenya.
         </p>
 
-        <div class="skills-grid" style="margin-top:28px">
-          <div class="skill-item">Laravel 11/12</div>
-          <div class="skill-item">Flutter & Dart</div>
-          <div class="skill-item">PostgreSQL 16</div>
+        <div class="skills-grid">
+          <div class="skill-item">Laravel 11/12 · PHP 8.2+</div>
+          <div class="skill-item">Flutter · Dart · BLoC</div>
+          <div class="skill-item">PostgreSQL · MySQL</div>
           <div class="skill-item">Firebase Suite</div>
-          <div class="skill-item">PHP 8.2+</div>
-          <div class="skill-item">BLoC / Clean Arch</div>
-          <div class="skill-item">DigitalOcean / Nginx</div>
-          <div class="skill-item">Advanced SQL / CTEs</div>
-          <div class="skill-item">AES-256-CBC / OTP</div>
-          <div class="skill-item">REST APIs / Sanctum</div>
-          <div class="skill-item">Filament Admin</div>
+          <div class="skill-item">Advanced SQL · CTEs</div>
+          <div class="skill-item">AES-256 · CSP · RBAC</div>
+          <div class="skill-item">DigitalOcean · Nginx</div>
+          <div class="skill-item">POS Installation & Support</div>
+          <div class="skill-item">Cisco Routing & Switching</div>
+          <div class="skill-item">LAN / WAN / VPN</div>
+          <div class="skill-item">Windows Server · AD</div>
           <div class="skill-item">Google ML Kit OCR</div>
         </div>
       </div>
 
-      <div class="about-card reveal">
-        <h3>At a Glance</h3>
-        <div class="stat-row">
-          <span class="stat-label">Current Role</span>
-          <span class="stat-value">Software Engineer</span>
+      <div class="reveal">
+        <div class="about-card">
+          <h3>Quick Info</h3>
+          <div class="stat-row">
+            <span class="stat-label">Current Role</span>
+            <span class="stat-value">Senior ICT Systems Admin<br/>& Software Engineer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Company</span>
+            <span class="stat-value">Chabrin Agencies Ltd</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Nairobi, Kenya</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">BSc Computer Science<br/>Kabarak University, 2022</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">GitHub</span>
+            <span class="stat-value"><a href="https://github.com/Stan-Mash" target="_blank">Stan-Mash</a></span>
+          </div>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">Company</span>
-          <span class="stat-value">Chabrin Agencies</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Location</span>
-          <span class="stat-value">Nairobi, Kenya</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Backend</span>
-          <span class="stat-value">Laravel · PHP</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Mobile</span>
-          <span class="stat-value">Flutter · Dart</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Database</span>
-          <span class="stat-value">PostgreSQL · MySQL</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">Infrastructure</span>
-          <span class="stat-value">DigitalOcean · Nginx</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">GitHub</span>
-          <span class="stat-value"><a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">Stan-Mash</a></span>
+        <div class="about-card" style="margin-top:16px">
+          <h3>Contact</h3>
+          <div class="contact-detail">
+            <span class="icon">📞</span>
+            <a href="tel:+254722123103">+254 722 123 103</a>
+          </div>
+          <div class="contact-detail">
+            <span class="icon">✉</span>
+            <a href="mailto:kimanistanley45@gmail.com">kimanistanley45@gmail.com</a>
+          </div>
+          <div class="contact-detail">
+            <span class="icon">📍</span>
+            <span>Nairobi, Kenya</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       EXPERIENCE
-  ══════════════════════════════════════ -->
-  <section id="experience">
+  <!-- ════════════════════════════
+       SERVICES
+  ════════════════════════════ -->
+  <section id="services">
     <div class="section-heading reveal">
       <span class="num">02.</span>
+      <h2>What I Do</h2>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <span class="service-icon">🖥️</span>
+        <div class="service-title">Full-Stack Web Development</div>
+        <div class="service-desc">
+          Enterprise web applications built on Laravel (11/12) with Filament admin panels,
+          REST APIs, queue workers, and PostgreSQL. From ERPs and lease platforms to
+          custom business management systems.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">Laravel</span>
+          <span class="service-tag">PHP 8.2+</span>
+          <span class="service-tag">Filament</span>
+          <span class="service-tag">PostgreSQL</span>
+          <span class="service-tag">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">📱</span>
+        <div class="service-title">Mobile App Development</div>
+        <div class="service-desc">
+          Cross-platform Flutter apps (Android, iOS, Web) with Clean Architecture, BLoC
+          state management, offline-first Drift ORM, and Firebase integration.
+          Built for real-world field and business use.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">Flutter</span>
+          <span class="service-tag">Dart</span>
+          <span class="service-tag">BLoC</span>
+          <span class="service-tag">Firebase</span>
+          <span class="service-tag">Offline-First</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">🗃️</span>
+        <div class="service-title">Database Administration</div>
+        <div class="service-desc">
+          PostgreSQL and MySQL database design, performance tuning, financial reconciliation,
+          and data recovery. Specialist in FIFO auditing, concurrency troubleshooting,
+          and complex CTEs and self-join SQL scripts.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">PostgreSQL</span>
+          <span class="service-tag">MySQL</span>
+          <span class="service-tag">Advanced SQL</span>
+          <span class="service-tag">DB Recovery</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">🏪</span>
+        <div class="service-title">POS System Installation & Support</div>
+        <div class="service-desc">
+          Supply, installation, configuration, and ongoing support of Point of Sale systems
+          for retail, hospitality, and service businesses. Hardware setup, software licensing,
+          staff training, and integration with payment terminals.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">POS Software</span>
+          <span class="service-tag">Hardware Setup</span>
+          <span class="service-tag">Staff Training</span>
+          <span class="service-tag">Payment Integration</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">🔧</span>
+        <div class="service-title">IT Support & Software Installation</div>
+        <div class="service-desc">
+          End-to-end IT support — hardware diagnostics, OS installation, software licensing
+          and deployment, printer/peripheral setup, antivirus, data recovery, and
+          remote/on-site helpdesk (L1–L3) for businesses and individuals.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">OS Installation</span>
+          <span class="service-tag">Software Setup</span>
+          <span class="service-tag">Data Recovery</span>
+          <span class="service-tag">Helpdesk L2/L3</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">🌐</span>
+        <div class="service-title">Networking & ICT Infrastructure</div>
+        <div class="service-desc">
+          LAN/WAN/VPN design and implementation, Cisco routing and switching, Windows Server
+          and Active Directory administration, DigitalOcean cloud deployments, and
+          complete ICT infrastructure management for organisations.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">Cisco</span>
+          <span class="service-tag">LAN/WAN/VPN</span>
+          <span class="service-tag">Windows Server</span>
+          <span class="service-tag">DigitalOcean</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════
+       EXPERIENCE
+  ════════════════════════════ -->
+  <section id="experience">
+    <div class="section-heading reveal">
+      <span class="num">03.</span>
       <h2>Where I've Worked</h2>
     </div>
 
     <div class="experience-layout reveal">
       <div class="exp-tabs" role="tablist">
-        <button class="exp-tab active" role="tab" onclick="switchTab(0)">Chabrin</button>
-        <button class="exp-tab" role="tab" onclick="switchTab(1)">OlPejeta</button>
-        <button class="exp-tab" role="tab" onclick="switchTab(2)">ICT Admin</button>
+        <button class="exp-tab active" role="tab" onclick="switchTab(0)">Chabrin Agencies</button>
+        <button class="exp-tab" role="tab" onclick="switchTab(1)">Metro ICT — Dev</button>
+        <button class="exp-tab" role="tab" onclick="switchTab(2)">Metro ICT — Support</button>
       </div>
 
       <div>
         <!-- Tab 0: Chabrin -->
         <div class="exp-panel active" id="tab-0">
-          <div class="exp-title">Software Engineer <span>@ Chabrin Agencies</span></div>
-          <div class="exp-meta">2023 — Present · Nairobi, Kenya</div>
+          <div class="exp-title">Senior ICT Systems Administrator <span>&amp; Software Engineer</span></div>
+          <div class="exp-company">Chabrin Agencies Limited</div>
+          <div class="exp-meta">July 2022 – Present &nbsp;·&nbsp; Nairobi, Kenya</div>
           <ul class="exp-bullets">
-            <li>Architected and delivered <strong>4 production systems</strong> (ERP, Lease Management, Field Officer App, Landlord Portal) from scratch — replacing 100% of spreadsheet-driven workflows across the organisation.</li>
-            <li>Resolved systemic <strong>FIFO allocation failures across 130,000+ financial records</strong> using CTEs and self-joins to audit and reconcile ledger discrepancies with zero data loss.</li>
-            <li>Executed live <strong>zero-downtime AES-256-CBC encryption of 22,070 PII records</strong> in production — national IDs, passport numbers, and KRA PINs migrated without service interruption.</li>
-            <li>Resynced fractured ledger tables (CHTACC ↔ CHTNTRS) using targeted SQL concurrency troubleshooting, recovering historical data integrity across the accounting database.</li>
-            <li>Manage DigitalOcean production pipeline (PHP 8.4, Nginx, opcache) with automated daily and weekly PostgreSQL backups — 30-day and 90-day retention respectively.</li>
-            <li>Maintain organisation-wide hardware/software infrastructure, enforce ICT security policies, and manage LAN/WAN/VPN networking across all offices.</li>
+            <li><b>Digital Transformation:</b> Replaced 100% of spreadsheet-based workflows across property management, HR, payroll, and lease operations with four interconnected production systems managing 500+ properties and 1,000+ tenants.</li>
+            <li><b>Enterprise ERP:</b> Led full-stack development of Chab-CHIPS — Laravel 12 ERP with 52 controllers, 89 migrations, and 43 RBAC roles spanning property management, HR, statutory payroll (PAYE/NSSF/SHIF/HELB), financial returns, and a 24-table disciplinary workflow.</li>
+            <li><b>Financial Data Integrity:</b> Spearheaded a reconciliation project within the PROMAS ERP, identifying and resolving systemic FIFO allocation failures across 130,000+ financial records, restoring accurate tenant balances company-wide.</li>
+            <li><b>Advanced SQL & Auditing:</b> Wrote complex SQL scripts using CTEs and self-joins to audit overlapping API imports, isolating and eliminating cross-column duplicate financial transactions causing silent ledger corruption.</li>
+            <li><b>DB Concurrency & Recovery:</b> Diagnosed and resolved severe database locking issues; wrote scripts to safely resync fractured ledger tables (CHTACC) with invoice tables (CHTNTRS) with zero data loss.</li>
+            <li><b>Lease Platform:</b> Architected a Laravel 11 + Filament 4.5 lease system — 27-state workflow engine with multi-party digital signing (tenant → advocate → landlord) deployed on DigitalOcean at 99.9% uptime.</li>
+            <li><b>Security Engineering:</b> Executed live zero-downtime AES-256-CBC encryption of 22,070 PII records; implemented per-request CSP nonces, rate-limited OTP portals, and magic-byte file validation.</li>
+            <li><b>Mobile Apps:</b> Designed and built two Flutter apps (field officer + landlord portals) using Clean Architecture, BLoC, and Firebase with simultaneous go-live in August 2025.</li>
+            <li><b>DevOps:</b> Manage DigitalOcean production pipeline (PHP 8.4, Nginx, opcache); automated daily and weekly PostgreSQL backups with 30-day and 90-day retention respectively.</li>
+            <li><b>ICT Administration:</b> Maintain organisation-wide hardware/software infrastructure, enforce ICT security policies, manage LAN/WAN/VPN networking, and deliver staff training on digital tools and data privacy compliance.</li>
           </ul>
         </div>
 
-        <!-- Tab 1: OlPejeta -->
+        <!-- Tab 1: Metro Dev -->
         <div class="exp-panel" id="tab-1">
-          <div class="exp-title">ICT Technician <span>@ Ol Pejeta Conservancy</span></div>
-          <div class="exp-meta">2021 — 2023 · Laikipia, Kenya</div>
+          <div class="exp-title">Support Developer <span>&amp; Systems Specialist</span></div>
+          <div class="exp-company">Metro ICT</div>
+          <div class="exp-meta">Aug 2021 – July 2022 &nbsp;·&nbsp; Nakuru, Kenya</div>
           <ul class="exp-bullets">
-            <li>Administered and maintained the full ICT infrastructure across a large wildlife conservancy — servers, networking, and end-user devices for 300+ staff.</li>
-            <li>Managed Windows Server environments including Active Directory, Group Policy, and DNS/DHCP configuration for site-wide operations.</li>
-            <li>Diagnosed and resolved LAN/WAN connectivity issues, maintained VPN tunnels between remote field stations and the main campus.</li>
-            <li>Delivered staff training on digital tools, data management, and cybersecurity best practices across all departments.</li>
-            <li>Supported hardware procurement, lifecycle management, and vendor coordination for ICT equipment refreshes.</li>
+            <li>Customised ERP modules to resolve workflow bottlenecks for property and retail sector clients.</li>
+            <li>Diagnosed and resolved complex code-level issues across multiple client installations; reduced downtime through root-cause analysis over symptomatic fixes.</li>
+            <li>Acted as L2/L3 escalation point for all infrastructure and software issues beyond first-line support scope.</li>
           </ul>
         </div>
 
-        <!-- Tab 2: ICT Admin -->
+        <!-- Tab 2: Metro Support -->
         <div class="exp-panel" id="tab-2">
-          <div class="exp-title">ICT Systems Administrator <span>@ Various</span></div>
-          <div class="exp-meta">2019 — 2021 · Kenya</div>
+          <div class="exp-title">IT Support Officer</div>
+          <div class="exp-company">Metro ICT</div>
+          <div class="exp-meta">Feb 2021 – July 2022 &nbsp;·&nbsp; Nakuru, Kenya</div>
           <ul class="exp-bullets">
-            <li>Provided Tier 1–3 technical support across hardware, software, and network infrastructure for enterprise and SMB clients.</li>
-            <li>Installed, configured, and maintained Cisco routing and switching equipment across multiple client sites.</li>
-            <li>Managed backup and disaster recovery procedures, ensuring RPO/RTO targets were met for critical business systems.</li>
-            <li>Deployed and supported Microsoft 365 environments including Exchange Online, SharePoint, and Teams for client organisations.</li>
+            <li>Managed LAN/WAN infrastructure and resolved connectivity incidents within agreed SLA windows.</li>
+            <li>Primary helpdesk contact for hardware and software issues; maintained asset inventory and SLA adherence records.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
+  <!-- ════════════════════════════
        PROJECTS
-  ══════════════════════════════════════ -->
+  ════════════════════════════ -->
   <section id="projects">
     <div class="section-heading reveal">
-      <span class="num">03.</span>
+      <span class="num">04.</span>
       <h2>Things I've Built</h2>
     </div>
 
-    <!-- FEATURED PROJECTS -->
     <div class="featured-projects">
 
-      <!-- Project 1: Lease Management -->
+      <!-- Project 1: Chab-CHIPS -->
       <div class="feat-project reveal">
         <div class="feat-visual">
           <div class="feat-visual-inner">
-            <div class="arch-diagram"><span class="accent">// Lease Workflow Engine</span>
-<span class="blue">Tenant</span> → Sign Request → <span class="accent">OTP Portal</span>
-          ↓
-<span class="white">27-State Workflow</span>
-          ↓
-<span class="blue">Landlord</span> → Approve → <span class="accent">DOMPDF Sign</span>
-          ↓
-<span class="white">DigitalOcean Production</span>
-   PHP 8.4 · Nginx · PostgreSQL
+            <div class="arch-diagram"><span class="c">// Chab-CHIPS ERP Architecture</span>
+<span class="t">52 Controllers · 89 Migrations</span>
+<span class="w">43 RBAC Roles · Google 2FA</span>
 
-<span class="accent">22,070</span> PII records encrypted
-<span class="accent">AES-256-CBC</span> · zero downtime</div>
-          </div>
-        </div>
-        <div class="feat-content">
-          <div class="feat-overline">Featured Project</div>
-          <div class="feat-name">Lease Management System</div>
-          <div class="feat-desc">
-            Enterprise lease management platform for 500+ properties and 1,000+ tenants.
-            Built a 27-state workflow engine with multi-party digital signing, OTP portals,
-            and PDF generation. Executed live AES-256-CBC encryption of 22,070 PII records
-            in production with zero downtime.
-          </div>
-          <div class="feat-result">
-            <span class="result-pill">22,070 PII records encrypted</span>
-            <span class="result-pill">27-state workflow</span>
-            <span class="result-pill">Live in production</span>
-          </div>
-          <div class="feat-tech">
-            <span class="tech-tag">Laravel 11</span>
-            <span class="tech-tag">Filament 4.5</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">DOMPDF</span>
-            <span class="tech-tag">DigitalOcean</span>
-          </div>
-          <div class="feat-links">
-            <a href="https://github.com/Stan-Mash/lease-management-casestudy" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              Case Study
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 2: Chab-CHIPS ERP -->
-      <div class="feat-project reverse reveal">
-        <div class="feat-visual">
-          <div class="feat-visual-inner">
-            <div class="arch-diagram"><span class="accent">// Chab-CHIPS ERP</span>
-<span class="white">52 Controllers · 89 Migrations</span>
-<span class="white">43 RBAC Roles · Google 2FA</span>
-
-<span class="blue">Payroll Engine</span>
-  PAYE · NHIF · NSSF · Housing Levy
+<span class="g">Payroll Engine</span>
+  PAYE · NSSF · SHIF · HELB
   BCMath precision arithmetic
 
-<span class="blue">Discipline Tracker</span>
+<span class="g">Discipline Tracker</span>
   24 tables · full audit trail
 
-<span class="accent">130,000+</span> FIFO records reconciled
-MySQL → PostgreSQL migration</div>
+<span class="c">130,000+</span> FIFO records reconciled
+MySQL → PostgreSQL migration
+<span class="t">Zero data loss</span></div>
           </div>
         </div>
         <div class="feat-content">
-          <div class="feat-overline">Featured Project</div>
-          <div class="feat-name">Chab-CHIPS Enterprise ERP</div>
+          <div class="feat-overline">Featured Project · Enterprise ERP</div>
+          <div class="feat-name">Chab-CHIPS — Property &amp; HR Management ERP</div>
           <div class="feat-desc">
-            Full-featured ERP system covering property management, payroll, HR discipline tracking,
-            and financial reconciliation. Resolved systemic FIFO allocation failures across 130,000+
-            records using CTEs and self-joins. Migrated from MySQL to PostgreSQL with zero data loss.
+            Full ERP system covering property management, HR, statutory payroll, financial
+            returns, invoicing, and a 24-table disciplinary workflow. Resolved FIFO allocation
+            failures across 130,000+ financial records using CTEs and self-joins. Executed
+            full MySQL → PostgreSQL migration with zero data loss.
           </div>
           <div class="feat-result">
             <span class="result-pill">130K+ records reconciled</span>
@@ -1190,7 +1017,7 @@ MySQL → PostgreSQL migration</div>
           <div class="feat-tech">
             <span class="tech-tag">Laravel 12</span>
             <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Laratrust</span>
+            <span class="tech-tag">Laratrust RBAC</span>
             <span class="tech-tag">Google 2FA</span>
             <span class="tech-tag">BCMath</span>
           </div>
@@ -1203,20 +1030,70 @@ MySQL → PostgreSQL migration</div>
         </div>
       </div>
 
+      <!-- Project 2: Lease System -->
+      <div class="feat-project reverse reveal">
+        <div class="feat-visual">
+          <div class="feat-visual-inner">
+            <div class="arch-diagram"><span class="c">// Lease Management System</span>
+<span class="t">27-State Workflow Engine</span>
+
+<span class="w">Tenant</span> → OTP Sign → <span class="c">Advocate</span>
+         → Landlord Approve
+         → <span class="t">FPDI PDF Stamp</span>
+         → Secure Storage
+
+<span class="g">Security Layer</span>
+  AES-256-CBC · CSP Nonces
+  Rate-limited OTP portals
+  Magic-byte file validation
+
+<span class="c">22,070</span> PII records encrypted
+<span class="t">99.9% uptime</span> · DigitalOcean</div>
+          </div>
+        </div>
+        <div class="feat-content">
+          <div class="feat-overline">Featured Project · SaaS Platform</div>
+          <div class="feat-name">Lease Management &amp; Digital Signing Platform</div>
+          <div class="feat-desc">
+            End-to-end lease management replacing 100% paper-based workflows. 27-state workflow
+            engine with multi-party digital signing (tenant → guarantor → advocate → landlord),
+            PDF overlay engine for coordinate-precise signature stamping, and OTP-secured portals.
+            Live zero-downtime encryption of 22,070 PII records in production.
+          </div>
+          <div class="feat-result">
+            <span class="result-pill">22,070 PII records encrypted</span>
+            <span class="result-pill">27-state workflow</span>
+            <span class="result-pill">500+ properties live</span>
+          </div>
+          <div class="feat-tech">
+            <span class="tech-tag">Laravel 11</span>
+            <span class="tech-tag">Filament 4.5</span>
+            <span class="tech-tag">DOMPDF · FPDI</span>
+            <span class="tech-tag">Africa's Talking</span>
+            <span class="tech-tag">DigitalOcean</span>
+          </div>
+          <div class="feat-links">
+            <a href="https://github.com/Stan-Mash/lease-management-casestudy" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              Case Study
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- OTHER PROJECTS -->
-    <div class="other-projects-heading reveal">
+    <!-- Other projects -->
+    <div class="other-heading reveal">
       <span>Other Noteworthy Projects</span>
     </div>
 
     <div class="projects-grid">
 
-      <!-- Field Officer App -->
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
           </div>
           <div class="proj-links">
             <a href="https://github.com/Stan-Mash/field-officer-app-casestudy" target="_blank" rel="noopener">
@@ -1224,18 +1101,16 @@ MySQL → PostgreSQL migration</div>
             </a>
           </div>
         </div>
-        <div class="proj-name">Field Officer Mobile App</div>
+        <div class="proj-name">Chabrin Field Officer App</div>
         <div class="proj-desc">
-          Offline-first Flutter app for field agents. Clean Architecture, BLoC state management,
-          Drift ORM for local persistence, and Google ML Kit OCR for document scanning.
-          16 modules, 161 commits, v2.4-alpha.
+          Offline-first Flutter app for field agents. Clean Architecture, BLoC, Drift SQLite ORM,
+          and Google ML Kit OCR for in-app ID scanning. 16 modules, 161 commits, v2.4-alpha.
         </div>
         <div class="proj-tech">
-          <span>Flutter</span><span>BLoC</span><span>Drift ORM</span><span>ML Kit</span><span>Firebase</span>
+          <span>Flutter</span><span>BLoC</span><span>Drift ORM</span><span>ML Kit OCR</span><span>Firebase</span>
         </div>
       </div>
 
-      <!-- Landlord Portal -->
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-icon">
@@ -1249,50 +1124,50 @@ MySQL → PostgreSQL migration</div>
         </div>
         <div class="proj-name">Landlord Self-Service Portal</div>
         <div class="proj-desc">
-          Mobile and web portal for landlords to view real-time portfolio analytics, occupancy rates,
-          and financial summaries. Custom Flutter chart and local storage packages.
-          92 commits, v1.0.0 production release.
+          Mobile and web portal for landlords — real-time portfolio analytics, rental income
+          statements, and agency deductions. Custom Flutter chart and local storage packages.
+          Simultaneous go-live with Field Officer App, August 2025.
         </div>
         <div class="proj-tech">
-          <span>Flutter</span><span>Firebase</span><span>BLoC</span><span>Charts</span><span>Mason</span>
+          <span>Flutter</span><span>Firebase</span><span>BLoC</span><span>Custom Charts</span><span>Mason</span>
         </div>
       </div>
 
-      <!-- ICT Infrastructure -->
       <div class="proj-card reveal">
         <div class="proj-top">
           <div class="proj-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           </div>
         </div>
-        <div class="proj-name">Production Infrastructure</div>
+        <div class="proj-name">POS System Deployments</div>
         <div class="proj-desc">
-          DigitalOcean production pipeline running PHP 8.4, Nginx, opcache with
-          <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">validate_timestamps=0</code>.
-          Automated daily + weekly PostgreSQL backups with 30-day and 90-day retention.
-          Zero-downtime deployment workflow.
+          Installation, configuration, and support of Point of Sale software and hardware for
+          retail and hospitality clients. Includes payment terminal integration, receipt printer
+          setup, staff training, and ongoing IT support.
         </div>
         <div class="proj-tech">
-          <span>DigitalOcean</span><span>Nginx</span><span>PHP 8.4</span><span>PostgreSQL</span><span>Linux</span>
+          <span>POS Software</span><span>Hardware Setup</span><span>Payment Terminals</span><span>Staff Training</span>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
+  <!-- ════════════════════════════
        CONTACT
-  ══════════════════════════════════════ -->
+  ════════════════════════════ -->
   <section id="contact">
-    <div class="contact-overline">04. What's Next?</div>
-    <h2 class="contact-heading">Get In Touch</h2>
+    <div class="contact-overline">05. What's Next?</div>
+    <h2 class="contact-heading">Let's Work Together</h2>
     <p class="contact-sub">
-      I'm currently open to new opportunities. Whether you have a role in mind, a system
-      to build, or just want to connect — my inbox is open and I respond within 48 hours.
+      Open to new opportunities, freelance projects, and consulting engagements.
+      Whether you need a full-stack system built, a database problem fixed, a POS installed,
+      or ICT infrastructure managed — reach out and I'll respond within 48 hours.
     </p>
-    <a href="mailto:Kimanistanley45@gmail.com" class="contact-email">
-      Say Hello →
+    <a href="mailto:kimanistanley45@gmail.com" class="contact-email">
+      kimanistanley45@gmail.com
     </a>
+    <a href="tel:+254722123103" class="contact-phone">📞 +254 722 123 103</a>
     <div class="contact-links">
       <a href="https://github.com/Stan-Mash" target="_blank" rel="noopener">GitHub</a>
       <a href="StanelyKimaniMacharia_CV.pdf" target="_blank">Download CV</a>
@@ -1302,36 +1177,35 @@ MySQL → PostgreSQL migration</div>
 </main>
 
 <footer>
-  <p>Designed & Built by <a href="https://github.com/Stan-Mash">Stanely Kimani Macharia</a></p>
+  <p>Designed &amp; Built by <a href="https://github.com/Stan-Mash">Stanely Kimani Macharia</a> &nbsp;·&nbsp; Nairobi, Kenya</p>
 </footer>
 
 <script>
-// Tab switcher for experience section
+// Scroll progress bar
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('progressBar');
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  el.style.transform = 'scaleX(' + (scrollTop / docHeight) + ')';
+});
+
+// Tab switcher
 function switchTab(index) {
-  document.querySelectorAll('.exp-tab').forEach((t, i) => {
-    t.classList.toggle('active', i === index);
-  });
-  document.querySelectorAll('.exp-panel').forEach((p, i) => {
-    p.classList.toggle('active', i === index);
-  });
+  document.querySelectorAll('.exp-tab').forEach((t,i) => t.classList.toggle('active', i===index));
+  document.querySelectorAll('.exp-panel').forEach((p,i) => p.classList.toggle('active', i===index));
 }
 
 // Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// Stagger project cards
-document.querySelectorAll('.proj-card').forEach((card, i) => {
-  card.style.transitionDelay = `${i * 0.1}s`;
-});
+// Stagger proj cards
+document.querySelectorAll('.proj-card').forEach((c,i) => { c.style.transitionDelay = (i*0.1)+'s'; });
+document.querySelectorAll('.service-card').forEach((c,i) => { c.style.transitionDelay = (i*0.08)+'s'; });
 </script>
 
 </body>
