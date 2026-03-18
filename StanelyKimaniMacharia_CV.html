@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stanely Kimani Macharia – CV</title>
+<style>
+/* ═══════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, 'Trebuchet MS', Arial, sans-serif;
+  font-size: 9pt;
+  color: #1c1c2e;
+  background: #fff;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PAGE SETUP — zero margins, A4
+═══════════════════════════════════════════════════════ */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PAGE WRAPPER — fixed A4 width, auto height (multi-page)
+═══════════════════════════════════════════════════════ */
+.cv {
+  width: 210mm;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOP HEADER — full width navy banner
+═══════════════════════════════════════════════════════ */
+.cv-header {
+  background: #0f3460;
+  padding: 22px 32px 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.cv-header .h-name {
+  font-size: 26pt;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+.cv-header .h-name em {
+  color: #e94560;
+  font-style: normal;
+}
+.cv-header .h-role {
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #94b8e0;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.h-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(0,201,167,0.15);
+  border: 1px solid rgba(0,201,167,0.4);
+  border-radius: 20px;
+  font-size: 7pt;
+  font-weight: 700;
+  color: #00c9a7;
+  letter-spacing: 0.5px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.h-badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #00c9a7;
+}
+.cv-header .h-contacts {
+  text-align: right;
+  font-size: 8.3pt;
+  color: #b8d0f0;
+  line-height: 1.9;
+}
+.cv-header .h-contacts a { color: #b8d0f0; text-decoration: none; }
+.cv-header .h-contacts span { color: #e94560; margin-right: 4px; }
+
+/* ═══════════════════════════════════════════════════════
+   BODY — two fixed columns, table-based for PDF compat
+═══════════════════════════════════════════════════════ */
+.cv-body {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.col-left {
+  display: table-cell;
+  width: 190pt;
+  background: #16213e;
+  padding: 20px 16px 20px 18px;
+  vertical-align: top;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.col-right {
+  display: table-cell;
+  background: #fff;
+  padding: 20px 22px 20px 20px;
+  vertical-align: top;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SIDEBAR COMPONENTS
+═══════════════════════════════════════════════════════ */
+.sb-block {
+  margin-bottom: 16px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.sb-title {
+  font-size: 6.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #e94560;
+  border-bottom: 1px solid #1e3a6e;
+  padding-bottom: 3px;
+  margin-bottom: 8px;
+}
+
+/* Skill bars */
+.sk-row { margin-bottom: 6px; }
+.sk-label { font-size: 7.8pt; color: #ccdaf2; margin-bottom: 3px; }
+.sk-track {
+  height: 3px;
+  background: #1e3a6e;
+  border-radius: 2px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.sk-fill {
+  height: 3px;
+  background: #e94560;
+  border-radius: 2px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Sidebar list */
+.sb-list { list-style: none; padding: 0; }
+.sb-list li {
+  font-size: 7.9pt;
+  color: #a8c0e0;
+  padding: 2px 0 2px 10px;
+  position: relative;
+  line-height: 1.45;
+}
+.sb-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  color: #e94560;
+  font-size: 7pt;
+}
+
+/* Edu in sidebar */
+.sb-edu-title {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #dce8fa;
+  margin-bottom: 1px;
+}
+.sb-edu-sub {
+  font-size: 7.5pt;
+  color: #7a9cc4;
+  margin-bottom: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MAIN CONTENT COMPONENTS
+═══════════════════════════════════════════════════════ */
+
+/* Section heading */
+.sec-block { margin-bottom: 16px; }
+.sec-title {
+  font-size: 7.8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #0f3460;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e94560;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* Summary */
+.summary-p {
+  font-size: 8.5pt;
+  color: #2d2d40;
+  line-height: 1.65;
+}
+
+/* Experience entry */
+.exp-block {
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.exp-row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1px;
+}
+.exp-jobtitle {
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: #0f3460;
+  flex: 1;
+  padding-right: 8px;
+}
+.exp-badge {
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #fff;
+  background: #0f3460;
+  padding: 2px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.exp-company {
+  font-size: 7.9pt;
+  font-weight: 600;
+  color: #e94560;
+  margin-bottom: 5px;
+}
+.exp-bullets { list-style: none; padding: 0; }
+.exp-bullets li {
+  font-size: 8.3pt;
+  color: #2d2d40;
+  padding: 1px 0 1px 12px;
+  position: relative;
+  line-height: 1.5;
+}
+.exp-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: #e94560;
+  font-size: 7pt;
+}
+.exp-bullets li b { color: #0f3460; }
+
+/* Job separator */
+.exp-sep {
+  border: none;
+  border-top: 1px dashed #dde3f0;
+  margin: 9px 0;
+}
+
+/* Project card */
+.proj-block {
+  border: 1px solid #dde3f0;
+  border-left: 3px solid #e94560;
+  border-radius: 3px;
+  background: #f8faff;
+  padding: 8px 11px;
+  margin-bottom: 8px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.proj-row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 3px;
+}
+.proj-title {
+  font-size: 8.8pt;
+  font-weight: 700;
+  color: #0f3460;
+}
+.proj-stack {
+  font-size: 7pt;
+  color: #999;
+  font-style: italic;
+}
+.proj-bullets { list-style: none; padding: 0; }
+.proj-bullets li {
+  font-size: 8pt;
+  color: #2d2d40;
+  padding: 1px 0 1px 12px;
+  position: relative;
+  line-height: 1.48;
+}
+.proj-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: #e94560;
+  font-size: 7pt;
+}
+.proj-bullets li b { color: #0f3460; }
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 5px;
+}
+.ptag {
+  font-size: 6.8pt;
+  font-weight: 700;
+  color: #0f3460;
+  background: #e2eaf8;
+  padding: 1px 7px;
+  border-radius: 20px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+</style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- ══════ HEADER ══════ -->
+  <div class="cv-header">
+    <div>
+      <div class="h-name">Stanely Kimani <em>Macharia</em></div>
+      <div class="h-role">Full-Stack Software Engineer &nbsp;|&nbsp; Database Administrator &nbsp;|&nbsp; ICT Systems Administrator</div>
+      <div class="h-badge">Open to Opportunities</div>
+    </div>
+    <div class="h-contacts">
+      <div><span>📍</span>Nairobi, Kenya</div>
+      <div><span>📞</span>+254 722 123 103</div>
+      <div><span>✉</span><a href="mailto:kimanistanley45@gmail.com">kimanistanley45@gmail.com</a></div>
+      <div><span>💻</span><a href="https://github.com/Stan-Mash">github.com/Stan-Mash</a></div>
+      <div><span>🔗</span><a href="https://www.linkedin.com/in/stanely-kimani/">linkedin.com/in/stanely-kimani</a></div>
+      <div><span>🌐</span><a href="https://stan-mash.github.io">stan-mash.github.io</a></div>
+    </div>
+  </div>
+
+  <!-- ══════ BODY: LEFT + RIGHT COLUMNS ══════ -->
+  <div class="cv-body">
+
+    <!-- ══ LEFT SIDEBAR ══ -->
+    <div class="col-left">
+
+      <div class="sb-block">
+        <div class="sb-title">Core Skills</div>
+        <div class="sk-row">
+          <div class="sk-label">Backend Dev — Laravel / PHP</div>
+          <div class="sk-track"><div class="sk-fill" style="width:95%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">Database Engineering &amp; SQL</div>
+          <div class="sk-track"><div class="sk-fill" style="width:90%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">Mobile Dev — Flutter / Dart</div>
+          <div class="sk-track"><div class="sk-fill" style="width:85%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">REST API Design</div>
+          <div class="sk-track"><div class="sk-fill" style="width:92%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">Security Engineering</div>
+          <div class="sk-track"><div class="sk-fill" style="width:88%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">DevOps &amp; Linux</div>
+          <div class="sk-track"><div class="sk-fill" style="width:80%"></div></div>
+        </div>
+        <div class="sk-row">
+          <div class="sk-label">Networking &amp; ICT Support</div>
+          <div class="sk-track"><div class="sk-fill" style="width:84%"></div></div>
+        </div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Technologies</div>
+        <ul class="sb-list">
+          <li>Laravel 11 / 12 · PHP 8.2+</li>
+          <li>Flutter &amp; Dart</li>
+          <li>PostgreSQL · MySQL</li>
+          <li>Advanced SQL — CTEs, Self-Joins</li>
+          <li>Filament 4.5 Admin Panel</li>
+          <li>BLoC / Hydrated BLoC</li>
+          <li>Tailwind CSS 4 · Vite</li>
+          <li>Firebase (FCM, Crashlytics)</li>
+          <li>REST APIs &amp; Sanctum</li>
+          <li>Git · GitHub · CI/CD</li>
+          <li>DigitalOcean · Nginx · Linux</li>
+          <li>DOMPDF · FPDI · QR Codes</li>
+          <li>Africa's Talking SMS API</li>
+          <li>Google ML Kit OCR</li>
+          <li>AWS S3 · Laravel Horizon</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Security &amp; DBA</div>
+        <ul class="sb-list">
+          <li>AES-256-CBC Encryption</li>
+          <li>PII Data Protection</li>
+          <li>CSP · CSRF · RBAC</li>
+          <li>OTP / 2FA — Google Auth</li>
+          <li>Financial Data Reconciliation</li>
+          <li>FIFO Allocation Auditing</li>
+          <li>Concurrency &amp; DB Locking</li>
+          <li>DB Backup &amp; Recovery</li>
+          <li>ERP Administration</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Infrastructure &amp; Support</div>
+        <ul class="sb-list">
+          <li>Cisco Routing &amp; Switching</li>
+          <li>LAN / WAN / VPN</li>
+          <li>Active Directory</li>
+          <li>Windows Server</li>
+          <li>ITIL Best Practices</li>
+          <li>SLA Management</li>
+          <li>Helpdesk L2 / L3</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Education</div>
+        <div class="sb-edu-title">BSc Computer Science</div>
+        <div class="sb-edu-sub">Kabarak University · 2022</div>
+        <div class="sb-edu-title">KCSE — Grade B</div>
+        <div class="sb-edu-sub">Anestar High School, Lanet · 2017</div>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Certifications</div>
+        <ul class="sb-list">
+          <li>ITIL Awareness</li>
+          <li>Cisco Networking Fundamentals</li>
+          <li>Cybersecurity Best Practices</li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Links</div>
+        <ul class="sb-list">
+          <li><a href="https://stan-mash.github.io" style="color:#7ab3e0;text-decoration:none">stan-mash.github.io</a></li>
+          <li><a href="https://github.com/Stan-Mash" style="color:#7ab3e0;text-decoration:none">github.com/Stan-Mash</a></li>
+          <li><a href="https://www.linkedin.com/in/stanely-kimani/" style="color:#7ab3e0;text-decoration:none">LinkedIn Profile</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-block">
+        <div class="sb-title">Languages</div>
+        <ul class="sb-list">
+          <li>English — Fluent</li>
+          <li>Swahili — Native</li>
+        </ul>
+      </div>
+
+    </div><!-- /col-left -->
+
+    <!-- ══ RIGHT MAIN ══ -->
+    <div class="col-right">
+
+      <!-- SUMMARY -->
+      <div class="sec-block">
+        <div class="sec-title">Professional Summary</div>
+        <p class="summary-p">
+          Results-driven Full-Stack Software Engineer, Database Administrator, and ICT Systems
+          Administrator with 5+ years of experience designing, building, and deploying enterprise-grade
+          web and mobile applications. Architected and delivered four production systems for Chabrin
+          Agencies managing 500+ properties and 1,000+ tenants. Expert at solving complex technical
+          problems at scale — from resolving systemic FIFO allocation failures across 130,000+
+          financial records and resyncing fractured ledger tables without data loss, to executing live
+          zero-downtime encryption of 22,070 PII records in production. Combines deep backend and
+          database expertise (Laravel, PostgreSQL, advanced SQL) with mobile development (Flutter,
+          BLoC, Firebase), infrastructure management (Linux, DigitalOcean, Nginx), and enterprise
+          security engineering (AES-256, CSP, RBAC, OTP).
+        </p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="sec-block">
+        <div class="sec-title">Professional Experience</div>
+
+        <!-- CHABRIN -->
+        <div class="exp-block">
+          <div class="exp-row1">
+            <div class="exp-jobtitle">Senior ICT Systems Administrator &amp; Software Engineer</div>
+            <div class="exp-badge">July 2022 – Present</div>
+          </div>
+          <div class="exp-company">Chabrin Agencies Limited · Nairobi, Kenya</div>
+          <ul class="exp-bullets">
+            <li><b>Digital Transformation:</b> Replaced 100% of spreadsheet-based workflows across property management, HR, payroll, and lease operations with four interconnected production systems managing 500+ properties and 1,000+ tenants.</li>
+            <li><b>Enterprise ERP:</b> Led full-stack development of Chab-CHIPS — Laravel 12 ERP with 52 controllers, 89 migrations, and 43 RBAC roles spanning property management, HR, statutory payroll (PAYE/NSSF/SHIF/HELB), financial returns, and a 24-table disciplinary workflow.</li>
+            <li><b>Financial Data Integrity:</b> Spearheaded a reconciliation project within the PROMAS ERP, identifying and resolving systemic FIFO allocation failures across 130,000+ financial records, restoring accurate tenant balances company-wide.</li>
+            <li><b>Advanced SQL &amp; Auditing:</b> Wrote complex SQL scripts using CTEs and self-joins to audit overlapping API imports, isolating and eliminating cross-column duplicate financial transactions causing silent ledger corruption.</li>
+            <li><b>DB Concurrency &amp; Recovery:</b> Diagnosed and resolved severe database locking issues; wrote scripts to safely resync fractured ledger tables (CHTACC) with invoice tables (CHTNTRS) with zero data loss.</li>
+            <li><b>Lease Platform:</b> Architected a Laravel 11 + Filament 4.5 lease system — 27-state workflow engine with multi-party digital signing (tenant → advocate → landlord) deployed on DigitalOcean at 99.9% uptime.</li>
+            <li><b>Security Engineering:</b> Executed live zero-downtime AES-256-CBC encryption of 22,070 PII records; implemented per-request CSP nonces, rate-limited OTP portals, and magic-byte file validation.</li>
+            <li><b>Performance:</b> Eliminated N+1 query patterns; added covering indexes and 5-minute auto-invalidating dashboard caching, significantly cutting admin page load times.</li>
+            <li><b>Mobile Apps:</b> Designed and built two Flutter apps (field officer + landlord portals) using Clean Architecture, BLoC, and Firebase with simultaneous go-live in August 2025.</li>
+            <li><b>Statutory Compliance:</b> Engineered full Kenya statutory compliance into the payroll engine — PAYE (graduated tax bands), NSSF (Tier I/II), SHIF, HELB, and Housing Levy — using BCMath precision arithmetic to ensure exact cent-level accuracy on every payslip.</li>
+            <li><b>Quality Assurance:</b> Wrote PHPUnit and Pest test suites covering critical business logic — workflow state transitions, OTP expiry, financial calculation accuracy, and RBAC permission boundaries — across 89 migrations.</li>
+            <li><b>DevOps:</b> Manage DigitalOcean production pipeline (PHP 8.4, Nginx, opcache); automated daily and weekly PostgreSQL backups with 30-day and 90-day retention respectively.</li>
+            <li><b>ICT Administration:</b> Maintain organisation-wide hardware/software infrastructure, enforce ICT security policies, manage LAN/WAN/VPN networking, and deliver staff training on digital tools and data privacy compliance.</li>
+          </ul>
+        </div>
+
+        <hr class="exp-sep">
+
+        <!-- METRO DEV -->
+        <div class="exp-block">
+          <div class="exp-row1">
+            <div class="exp-jobtitle">Support Developer &amp; Systems Specialist</div>
+            <div class="exp-badge">Aug 2021 – July 2022</div>
+          </div>
+          <div class="exp-company">Metro ICT · Nakuru, Kenya</div>
+          <ul class="exp-bullets">
+            <li>Customised ERP modules to resolve workflow bottlenecks for property and retail sector clients.</li>
+            <li>Diagnosed and resolved complex code-level issues across multiple client installations; reduced downtime through root-cause analysis over symptomatic fixes.</li>
+            <li>Acted as L2/L3 escalation point for all infrastructure and software issues beyond first-line support scope.</li>
+          </ul>
+        </div>
+
+        <hr class="exp-sep">
+
+        <!-- METRO SUPPORT -->
+        <div class="exp-block">
+          <div class="exp-row1">
+            <div class="exp-jobtitle">IT Support Officer</div>
+            <div class="exp-badge">Feb 2021 – July 2022</div>
+          </div>
+          <div class="exp-company">Metro ICT · Nakuru, Kenya</div>
+          <ul class="exp-bullets">
+            <li>Managed LAN/WAN infrastructure and resolved connectivity incidents within agreed SLA windows.</li>
+            <li>Primary helpdesk contact for hardware and software issues; maintained asset inventory and SLA adherence records.</li>
+          </ul>
+        </div>
+
+      </div><!-- /experience -->
+
+      <!-- PROJECTS -->
+      <div class="sec-block">
+        <div class="sec-title">Key Projects — Chabrin Agencies</div>
+
+        <!-- PROJECT 1 -->
+        <div class="proj-block">
+          <div class="proj-row1">
+            <div class="proj-title">1. Chab-CHIPS — Enterprise Property &amp; HR Management ERP</div>
+            <div class="proj-stack">Laravel 12 · PostgreSQL · Laratrust RBAC · Google 2FA</div>
+          </div>
+          <ul class="proj-bullets">
+            <li><b>Problem:</b> All property, HR, payroll, and financial operations ran on disconnected spreadsheets with no audit trail or access control.</li>
+            <li>Built a multi-tenant ERP with 52 controllers across 9 domains — property, HR, statutory payroll, invoicing, financial returns, and a complete 24-table formal disciplinary workflow.</li>
+            <li>Engineered multi-level maker-checker approval workflows; provisioned 43 RBAC roles with module/sub-module permission control and Google 2FA for administrators.</li>
+            <li>Executed full MySQL → PostgreSQL migration with zero data loss using custom in-house tooling.</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="ptag">Laravel 12</span><span class="ptag">PostgreSQL</span><span class="ptag">Multi-tenant ERP</span>
+            <span class="ptag">Payroll Automation</span><span class="ptag">Approval Workflows</span>
+            <span class="ptag">Google 2FA</span><span class="ptag">PHPUnit · Pest</span><span class="ptag">PAYE/NSSF/SHIF/HELB</span><span class="ptag">Audit Logging</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="proj-block">
+          <div class="proj-row1">
+            <div class="proj-title">2. Lease Management System — Digital Signing &amp; Document Platform</div>
+            <div class="proj-stack">Laravel 11 · Filament 4.5 · DOMPDF · FPDI · Africa's Talking · DigitalOcean</div>
+          </div>
+          <ul class="proj-bullets">
+            <li><b>Problem:</b> Lease execution was 100% paper-based with no verification, audit trail, or secure document storage.</li>
+            <li>Designed a 27-state workflow engine with multi-party signing (tenant → guarantor → advocate → landlord) and 7 RBAC roles with zone-based access control.</li>
+            <li>Built a PDF overlay engine (FPDI) for coordinate-precise signature stamping and a visual calibration artisan command (<code>lease:visual-map</code>).</li>
+            <li>OTP-secured signing portal — rate-limited (5 OTP/min, 3 signatures/min), signed URL expiry, device fingerprinting, geolocation capture.</li>
+            <li>Live zero-downtime AES-256-CBC encryption of 22,070 PII records; per-request CSP nonces; magic-byte file validation.</li>
+            <li><b>Impact:</b> 500+ properties fully digital end-to-end; live at leases-docs.chabrinagencies.com, 99.9% uptime.</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="ptag">Digital Signing</span><span class="ptag">OTP / SMS</span><span class="ptag">PDF Overlay</span>
+            <span class="ptag">AES-256</span><span class="ptag">CSP</span><span class="ptag">BCMath Financials</span><span class="ptag">DigitalOcean</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="proj-block">
+          <div class="proj-row1">
+            <div class="proj-title">3. Chabrin Field Officer Mobile App</div>
+            <div class="proj-stack">Flutter · BLoC · Drift ORM · Google ML Kit · Firebase · Clean Architecture</div>
+          </div>
+          <ul class="proj-bullets">
+            <li><b>Problem:</b> Field officers managing on-site properties had no mobile access to tenant, payment, or inspection data.</li>
+            <li>Cross-platform Flutter app (Android, iOS, Web) — Clean Architecture, BLoC state management, dependency injection (get_it/injectable).</li>
+            <li>Offline-first strategy using Drift SQLite ORM — fully functional without connectivity, auto-syncs when online.</li>
+            <li>Google ML Kit OCR — field officers scan tenant ID documents in-app, eliminating manual data entry errors during inspections.</li>
+            <li>v2.4-alpha · 161 commits · 16 modules: properties, tenants, payments, inspections, leave, payslips, documents.</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="ptag">Flutter</span><span class="ptag">BLoC</span><span class="ptag">Clean Architecture</span>
+            <span class="ptag">Offline-First</span><span class="ptag">ML Kit OCR</span><span class="ptag">Firebase</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="proj-block">
+          <div class="proj-row1">
+            <div class="proj-title">4. Chabrin Landlord Self-Service Portal</div>
+            <div class="proj-stack">Flutter · BLoC · Firebase · responsive_framework · Mason · Custom Charts</div>
+          </div>
+          <ul class="proj-bullets">
+            <li><b>Problem:</b> Landlords had zero visibility into portfolio or financials without requesting manual reports from Chabrin staff.</li>
+            <li>Flutter mobile + web app delivering real-time portfolio view, rental income statements, agency deductions, and analytics dashboard.</li>
+            <li>Built custom <code>charts_flutter</code> and shared <code>local_storage</code> packages reused across the Chabrin Flutter app suite.</li>
+            <li>Single responsive codebase (mobile + desktop); Mason code generation for consistent Clean Architecture feature scaffolding.</li>
+            <li>Coordinated simultaneous go-live with Field Officer app (August 2025), managing cross-app API compatibility.</li>
+          </ul>
+          <div class="proj-tags">
+            <span class="ptag">Flutter</span><span class="ptag">Responsive Web</span><span class="ptag">Custom Packages</span>
+            <span class="ptag">Data Visualisation</span><span class="ptag">Mason</span><span class="ptag">Self-Service Portal</span>
+          </div>
+        </div>
+
+      </div><!-- /projects -->
+
+    </div><!-- /col-right -->
+  </div><!-- /cv-body -->
+
+</div><!-- /cv -->
+</body>
+</html>
