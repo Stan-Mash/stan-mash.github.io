@@ -546,6 +546,83 @@ section { padding:88px 0; }
 .proj-tech span { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); }
 
 /* ═══════════════════════════════════════════
+   MOBILE APPS SECTION
+═══════════════════════════════════════════ */
+.mobile-grid { display:flex; flex-direction:column; gap:32px; }
+
+.mobile-app-card {
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--radius); padding:32px;
+  transition:all 0.25s var(--ease);
+}
+.mobile-app-card:hover {
+  border-color:rgba(0,201,167,0.2);
+  box-shadow:0 12px 32px rgba(0,0,0,0.3);
+}
+
+.mobile-app-header {
+  display:flex; align-items:center; gap:16px; margin-bottom:16px;
+}
+.mobile-app-icon { font-size:28px; flex-shrink:0; }
+.mobile-app-name { font-size:19px; font-weight:800; color:var(--white); }
+.mobile-app-meta {
+  font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-top:3px;
+}
+.mobile-app-link {
+  margin-left:auto; flex-shrink:0;
+  font-family:var(--font-mono); font-size:12px;
+  color:var(--teal); text-decoration:none;
+  border:1px solid rgba(0,201,167,0.3); border-radius:6px;
+  padding:6px 14px; transition:all 0.2s;
+}
+.mobile-app-link:hover { background:rgba(0,201,167,0.08); }
+
+.mobile-app-desc {
+  font-size:15px; color:var(--text-muted);
+  line-height:1.7; margin-bottom:24px;
+}
+
+.mobile-screenshots-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  margin-bottom:20px;
+}
+
+.screenshot-placeholder {
+  background:var(--bg2);
+  border:1px dashed rgba(255,255,255,0.1);
+  border-radius:8px; padding:32px 16px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; color:var(--text-muted);
+  font-family:var(--font-mono); font-size:11px; text-align:center;
+  grid-column: 1 / -1;
+}
+.placeholder-icon { font-size:24px; }
+
+.screenshot-img {
+  border-radius:8px; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  transition:all 0.2s; cursor:zoom-in;
+}
+.screenshot-img:hover { transform:scale(1.03); border-color:rgba(0,201,167,0.3); }
+.screenshot-img img { width:100%; display:block; }
+
+.mobile-tech-row { display:flex; flex-wrap:wrap; gap:10px; }
+.mobile-tech {
+  font-family:var(--font-mono); font-size:11.5px;
+  padding:4px 10px; border-radius:20px;
+  background:rgba(0,201,167,0.07);
+  border:1px solid rgba(0,201,167,0.2);
+  color:var(--teal);
+}
+
+@media (max-width:768px) {
+  .mobile-app-header { flex-wrap:wrap; }
+  .mobile-app-link { margin-left:0; }
+  .mobile-screenshots-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+/* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
 #contact {
@@ -642,6 +719,7 @@ footer a { color:var(--coral); text-decoration:none; }
     <li><a href="#services">Services</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#mobile">Mobile</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://github.com/Stan-Mash" target="_blank" rel="noopener" class="nav-cta">GitHub</a></li>
   </ul>
@@ -811,15 +889,15 @@ footer a { color:var(--coral); text-decoration:none; }
         <div class="service-title">Full-Stack Web Development</div>
         <div class="service-desc">
           Enterprise web applications built on Laravel (11/12) with Filament admin panels,
-          REST APIs, queue workers, and PostgreSQL. From ERPs and lease platforms to
-          custom business management systems.
+          REST APIs, queue workers, and PostgreSQL. Tested with PHPUnit and Pest —
+          unit, feature, and integration test suites covering critical business flows.
         </div>
         <div class="service-tags">
           <span class="service-tag">Laravel</span>
           <span class="service-tag">PHP 8.2+</span>
           <span class="service-tag">Filament</span>
-          <span class="service-tag">PostgreSQL</span>
-          <span class="service-tag">REST APIs</span>
+          <span class="service-tag">PHPUnit</span>
+          <span class="service-tag">Pest PHP</span>
         </div>
       </div>
 
@@ -853,6 +931,24 @@ footer a { color:var(--coral); text-decoration:none; }
           <span class="service-tag">MySQL</span>
           <span class="service-tag">Advanced SQL</span>
           <span class="service-tag">DB Recovery</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-icon">✅</span>
+        <div class="service-title">Quality Assurance & Compliance Engineering</div>
+        <div class="service-desc">
+          Automated testing with PHPUnit and Pest across unit, feature, and integration layers.
+          Strict statutory compliance: PAYE, NSSF, SHIF, HELB, and KRA PIN validation
+          built into payroll and financial systems. Full audit trails, RBAC enforcement,
+          and ITIL-aligned change management for enterprise deployments.
+        </div>
+        <div class="service-tags">
+          <span class="service-tag">PHPUnit</span>
+          <span class="service-tag">Pest PHP</span>
+          <span class="service-tag">PAYE/NSSF/SHIF</span>
+          <span class="service-tag">Audit Trails</span>
+          <span class="service-tag">ITIL</span>
         </div>
       </div>
 
@@ -931,13 +1027,15 @@ footer a { color:var(--coral); text-decoration:none; }
           <div class="exp-meta">July 2022 – Present &nbsp;·&nbsp; Nairobi, Kenya</div>
           <ul class="exp-bullets">
             <li><b>Digital Transformation:</b> Replaced 100% of spreadsheet-based workflows across property management, HR, payroll, and lease operations with four interconnected production systems managing 500+ properties and 1,000+ tenants.</li>
-            <li><b>Enterprise ERP:</b> Led full-stack development of Chab-CHIPS — Laravel 12 ERP with 52 controllers, 89 migrations, and 43 RBAC roles spanning property management, HR, statutory payroll (PAYE/NSSF/SHIF/HELB), financial returns, and a 24-table disciplinary workflow.</li>
+            <li><b>Enterprise ERP:</b> Led full-stack development of Chab-CHIPS — Laravel 12 ERP with 52 controllers, 89 migrations, and 43 RBAC roles spanning property management, HR, <strong>statutory payroll with full Kenya compliance (PAYE, NSSF, SHIF, HELB, Housing Levy)</strong>, financial returns, and a 24-table disciplinary workflow.</li>
             <li><b>Financial Data Integrity:</b> Spearheaded a reconciliation project within the PROMAS ERP, identifying and resolving systemic FIFO allocation failures across 130,000+ financial records, restoring accurate tenant balances company-wide.</li>
             <li><b>Advanced SQL & Auditing:</b> Wrote complex SQL scripts using CTEs and self-joins to audit overlapping API imports, isolating and eliminating cross-column duplicate financial transactions causing silent ledger corruption.</li>
             <li><b>DB Concurrency & Recovery:</b> Diagnosed and resolved severe database locking issues; wrote scripts to safely resync fractured ledger tables (CHTACC) with invoice tables (CHTNTRS) with zero data loss.</li>
             <li><b>Lease Platform:</b> Architected a Laravel 11 + Filament 4.5 lease system — 27-state workflow engine with multi-party digital signing (tenant → advocate → landlord) deployed on DigitalOcean at 99.9% uptime.</li>
             <li><b>Security Engineering:</b> Executed live zero-downtime AES-256-CBC encryption of 22,070 PII records; implemented per-request CSP nonces, rate-limited OTP portals, and magic-byte file validation.</li>
             <li><b>Mobile Apps:</b> Designed and built two Flutter apps (field officer + landlord portals) using Clean Architecture, BLoC, and Firebase with simultaneous go-live in August 2025.</li>
+            <li><b>Statutory Compliance:</b> Engineered full Kenya statutory compliance into the payroll engine — PAYE (graduated tax bands), NSSF (Tier I/II), SHIF, HELB deductions, and Housing Levy — using BCMath precision arithmetic to ensure exact cent-level accuracy on every payslip.</li>
+            <li><b>Quality Assurance:</b> Wrote PHPUnit and Pest test suites covering critical business logic — workflow state transitions, OTP expiry enforcement, financial calculation accuracy, and RBAC permission boundaries — preventing regressions across 89 migrations.</li>
             <li><b>DevOps:</b> Manage DigitalOcean production pipeline (PHP 8.4, Nginx, opcache); automated daily and weekly PostgreSQL backups with 30-day and 90-day retention respectively.</li>
             <li><b>ICT Administration:</b> Maintain organisation-wide hardware/software infrastructure, enforce ICT security policies, manage LAN/WAN/VPN networking, and deliver staff training on digital tools and data privacy compliance.</li>
           </ul>
@@ -1013,12 +1111,13 @@ MySQL → PostgreSQL migration
             <span class="result-pill">130K+ records reconciled</span>
             <span class="result-pill">43 RBAC roles</span>
             <span class="result-pill">52 controllers</span>
+            <span class="result-pill">Full KRA/NSSF/SHIF compliance</span>
           </div>
           <div class="feat-tech">
             <span class="tech-tag">Laravel 12</span>
             <span class="tech-tag">PostgreSQL</span>
             <span class="tech-tag">Laratrust RBAC</span>
-            <span class="tech-tag">Google 2FA</span>
+            <span class="tech-tag">PHPUnit · Pest</span>
             <span class="tech-tag">BCMath</span>
           </div>
           <div class="feat-links">
@@ -1154,10 +1253,85 @@ MySQL → PostgreSQL migration
   </section>
 
   <!-- ════════════════════════════
+       MOBILE APPS SHOWCASE
+  ════════════════════════════ -->
+  <section id="mobile">
+    <div class="section-heading reveal">
+      <span class="num">05.</span>
+      <h2>Mobile Apps</h2>
+    </div>
+
+    <div class="mobile-grid">
+
+      <div class="mobile-app-card reveal">
+        <div class="mobile-app-header">
+          <div class="mobile-app-icon">📱</div>
+          <div>
+            <div class="mobile-app-name">Chabrin Field Officer App</div>
+            <div class="mobile-app-meta">Flutter · v2.4-alpha · 161 commits · 16 modules</div>
+          </div>
+          <a href="https://github.com/Stan-Mash/field-officer-app-casestudy" target="_blank" rel="noopener" class="mobile-app-link">Case Study →</a>
+        </div>
+        <div class="mobile-app-desc">
+          Offline-first Android/iOS/Web app for field officers managing property inspections,
+          tenant onboarding, payments, and leave — without needing internet connectivity.
+          Google ML Kit OCR scans tenant IDs in-app, eliminating manual data entry.
+        </div>
+        <div class="mobile-screenshots-grid" id="fieldScreenshots">
+          <div class="screenshot-placeholder">
+            <span class="placeholder-icon">📸</span>
+            <span>Screenshots coming soon</span>
+          </div>
+        </div>
+        <div class="mobile-tech-row">
+          <span class="mobile-tech">Flutter</span>
+          <span class="mobile-tech">BLoC</span>
+          <span class="mobile-tech">Drift ORM</span>
+          <span class="mobile-tech">ML Kit OCR</span>
+          <span class="mobile-tech">Firebase</span>
+          <span class="mobile-tech">Clean Architecture</span>
+          <span class="mobile-tech">Offline-First</span>
+        </div>
+      </div>
+
+      <div class="mobile-app-card reveal">
+        <div class="mobile-app-header">
+          <div class="mobile-app-icon">📊</div>
+          <div>
+            <div class="mobile-app-name">Chabrin Landlord Portal</div>
+            <div class="mobile-app-meta">Flutter · v1.0.0 · 92 commits · Live Aug 2025</div>
+          </div>
+          <a href="https://github.com/Stan-Mash/landlord-portal-casestudy" target="_blank" rel="noopener" class="mobile-app-link">Case Study →</a>
+        </div>
+        <div class="mobile-app-desc">
+          Self-service portal for landlords — real-time portfolio analytics, rental income
+          statements, agency deductions, and occupancy dashboards. Single Flutter codebase
+          running on mobile and web. Custom charts and local storage packages built in-house.
+        </div>
+        <div class="mobile-screenshots-grid" id="landlordScreenshots">
+          <div class="screenshot-placeholder">
+            <span class="placeholder-icon">📸</span>
+            <span>Screenshots coming soon</span>
+          </div>
+        </div>
+        <div class="mobile-tech-row">
+          <span class="mobile-tech">Flutter</span>
+          <span class="mobile-tech">BLoC</span>
+          <span class="mobile-tech">Firebase</span>
+          <span class="mobile-tech">Custom Charts</span>
+          <span class="mobile-tech">Mason</span>
+          <span class="mobile-tech">Responsive Web</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════
        CONTACT
   ════════════════════════════ -->
   <section id="contact">
-    <div class="contact-overline">05. What's Next?</div>
+    <div class="contact-overline">06. What's Next?</div>
     <h2 class="contact-heading">Let's Work Together</h2>
     <p class="contact-sub">
       Open to new opportunities, freelance projects, and consulting engagements.
